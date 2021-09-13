@@ -8,6 +8,26 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+\newcommand{\po}{\textcolor{BlueViolet}{po}}
+\newcommand{\xpo}{\textcolor{BlueViolet}{xpo}}
+\newcommand{\rf}{\textcolor{Green}{rf}}
+\newcommand{\co}{\textcolor{BurntOrange}{co}}
+\newcommand{\coe}{\textcolor{BurntOrange}{coe}}
+\newcommand{\mo}{\textcolor{Red}{mo}}
+\newcommand{\hb}{\textcolor{NavyBlue}{hb}}
+\newcommand{\fr}{\textcolor{RubineRed}{fr}}
+\newcommand{\fre}{\textcolor{RubineRed}{fre}}
+\newcommand{\xhb}{\textcolor{NavyBlue}{xhb}}
+\newcommand{\rfe}{\textcolor{Green}{rfe}}
+\newcommand{\rfi}{\textcolor{Green}{rfi}}
+\newcommand{\sw}{\textcolor{BurntOrange}{sw}}
+\newcommand{\jhb}{\textcolor{NavyBlue}{jhb}}
+\newcommand{\jmo}{\textcolor{Red}{jmo}}
+\newcommand{\eco}{\textcolor{WildStrawberry}{eco}}
+\newcommand{\rmw}{\textcolor{Bittersweet}{rmw}}
+\newcommand{\imp}{\textcolor{LimeGreen}{imp}}
+
+
 %Misc coloring for binary relations
 
 \title{Robustness Between Weak Memory Models}
@@ -39,11 +59,17 @@
 
     \begin{frame}{Examples of Robustness}
 
-        %place figures here of SB, LB and IRIW
+        As an example, consider robustness of programs running on ARM against x86. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics{LB_SB_ROBUSTNESS_EX.PNG}
+            }
+        \end{figure}
         %Explain that TSO exhibits SB but SC does not. Which means SB-TSO is not Robust against SC.
+        In the above figure, program SB's outcome $a=1 \wedge b=1$ is allowed by both x86 and ARM. 
+        But for the program LB, the outcome $a=1 \wedge b=1$ is allowed by ARM but not by x86.
 
-        %Continue.
-        %Use slides generously because this intuition is important.
+        Thus, program SB is x86 robust while LB is not. 
 
     \end{frame}
 
@@ -53,7 +79,12 @@
             \textit{A program P is M-K robust if all its K-consistent executions are also M-consistent.} 
         \end{center}
         
-        %Give example of SB program being TSO-ARMv7 robust. 
+        %Give example of SB program being TSO-ARMv7 robust.
+        So for our example above:
+        \begin{itemize}
+            \item SB is x86-ARM robust.
+            \item LB is not x86-ARM robust.
+        \end{itemize} 
 
     \end{frame}
 
@@ -70,16 +101,50 @@
     \begin{frame}{Preliminary Definitions of Binary Relations}
 
         %Put basic ones like po/rf/co/fr
+        Binary relations:
+        \begin{itemize}
+            \item {\po} - Program order per thread.
+            \item {\rf} - Between a read and the write from which its read value comes.
+            \item {\co} - Order between writes/updates to same location.
+            \item {\rmw} - Order between a Read and a Write which form an Atomic update (read-modify-writes).
+            \item {\fr} - $\rf^{-1};\co$ read-happens before (also abbreviated as reads-before ).
+            \item {\eco} - $\rfe \cup \coe \cup \fre$ called as extended coherence order (take all the external preliminary relations apart from \po).
+            \item 
+        \end{itemize}
+
 
     \end{frame}
 
-    \begin{frame}{SC and X86-TSO}
+    \begin{frame}{SC}
 
-        %SC definition
+        SC with the above relations can be defined as:
+        \begin{itemize}
+            \item $\po \ \cup \ \rf \ \cup \fr \ \cup \ \co$ acyclic.
+            \item $\rmw \cap \fre;\coe = \phi$.
+        \end{itemize}
 
         %TSO definition
 
     \end{frame}
+
+    \begin{frame}{x86-TSO}
+
+        Some additional binary relations (derived)
+        \begin{itemize}
+            \item {\xpo} - $((W * W) \cup (R * W) \cup (R * R)) \cap \po$ preserved program order.
+            \item {\imp} - $\po;[dom(\rmw) \cup F] \cup [codom(\rmw) \cup F];\po$ implied order.
+            \item {\xhb} - $\xpo \cup \imp \cup \rfe \cup \fr \cup co$ x86 happens-before.
+        \end{itemize}
+
+        x86 is then defined as 
+        \begin{itemize}
+            \item $\po \ \cup \ \rf \ \cup \fr \ \cup \ \co$ acyclic.
+            \item $\rmw \cap \fre;\coe = \phi$.
+            \item $\xhb$ acyclic.
+        \end{itemize}
+
+    \end{frame}
+    
 
     \begin{frame}{Robustness Conditions: Intuition}
 
