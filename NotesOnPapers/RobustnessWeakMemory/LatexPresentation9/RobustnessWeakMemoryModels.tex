@@ -1,0 +1,118 @@
+%\documentclass[xcolor=dvipsnames]{beamer}
+\documentclass[notes, xcolor=dvipsnames]{beamer}
+
+\usetheme{Warsaw}
+
+\usepackage{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+%Misc coloring for binary relations
+
+\title{Robustness Between Weak Memory Models}
+\subtitle{Soham Chakraborty}
+
+\author{Presentation by \\ Akshay Gopalakrishnan}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \maketitle
+
+    \end{frame}
+
+    \begin{frame}{Introduction}
+
+        \begin{itemize}
+            \item Robustness is a property that a program can have given two memory models.
+            \item A program executing under a memory model $K$ is Robust against memory model $M$ if all consistent executions under $K$ are also consistent under $M$.
+            \item This property is useful in ensuring safe portability of programs across different platforms.
+            \item However, as far as memory models are concerned, Robustness is maintained only against Sequential Consistency (SC).
+            \item This paper analyzes robustness against weaker memory models such as x86-TSO, ARMv7 and ARMv8. 
+            \item Robustness conditions are established against each of these models.
+            \item An analysis tool is also developed to ensure a program is Robust or if not, adding fence instructions to ensure Robustness.   
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Examples of Robustness}
+
+        %place figures here of SB, LB and IRIW
+        %Explain that TSO exhibits SB but SC does not. Which means SB-TSO is not Robust against SC.
+
+        %Continue.
+        %Use slides generously because this intuition is important.
+
+    \end{frame}
+
+    \begin{frame}{Robustnes Definition}
+
+        \begin{center}
+            \textit{A program P is M-K robust if all its K-consistent executions are also M-consistent.} 
+        \end{center}
+        
+        %Give example of SB program being TSO-ARMv7 robust. 
+
+    \end{frame}
+
+    \begin{frame}{Axiomatic Specification of Memory Consistency Models}
+
+        \begin{itemize}
+            \item Define binary relations (mainly partial orders) between program constructs Read/Write/RMW/Fence. 
+            \item Per-execution semantics. 
+            \item Specify axioms based on relations, which are acyclic/irreflexivity conditions on execution graphs. 
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Preliminary Definitions of Binary Relations}
+
+        %Put basic ones like po/rf/co/fr
+
+    \end{frame}
+
+    \begin{frame}{SC and X86-TSO}
+
+        %SC definition
+
+        %TSO definition
+
+    \end{frame}
+
+    \begin{frame}{Robustness Conditions: Intuition}
+
+        %mention the Paragraph based intuition on page 4 just before the Robustness conditions.
+
+    \end{frame}
+
+    \begin{frame}{SC-x86TSO Robustness Condition}
+
+        %For each of the condition (in the union relation), mention intuition as to why it is so.
+        %do this only for SC-TSO as the rest are almost same and personally I do not find it worth going in-depth for each.
+
+    \end{frame}
+
+    \begin{frame}{Checking and Enforcing Robustness}
+
+        \begin{itemize}
+            \item Take the Control Flow Graph of the program.
+            \item Build a Memory-access pair graph (MPG) capturing two important edge relations (eco and epo).
+            \item If MPG has a cycle, check each access pair whether ordered, as per a condition based on M-K Robustness.
+            \item If every pair is ordered, program is M-K Robust.
+            \item Else, insert appropriate fences between memory access pairs that are not ordered. 
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Experimental Evaluation}
+
+    \end{frame}
+
+    \begin{frame}{Thank you}
+        Questions?
+    \end{frame}
+
+
+\end{document}

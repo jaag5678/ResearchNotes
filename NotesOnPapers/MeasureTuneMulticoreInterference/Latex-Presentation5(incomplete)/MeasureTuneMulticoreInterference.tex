@@ -1,0 +1,91 @@
+\documentclass{beamer}
+
+%\documentclass[notes]{beamer}
+
+\usepackage{inputenc}
+\usepackage{graphicx}
+
+\title{Slow and Steady: Measuring and Tuning Multicore Interference}
+\subtitle{Dan Iorga, Tyler Sorenson, John Wickerson, Alastair Donaldson}
+
+\author{Presented by: Akshay Gopalakrishnan}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \titlepage
+    
+    \end{frame}
+
+    \begin{frame}{Introduction}
+
+        \begin{itemize}
+            \item Multicore interference results in slowdown of program execution.
+            \item Existing tests show slowdown in the ballpark of 300x times slowdown.
+            \item These tests rely on designing enemy programs to be run in parallel to the main one.
+            \item However, this process of testing is highly manual.
+            \item To add, the results may not be reproducible due to lack of parameters to define the testing environment more accurately.
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Contributions in this work}
+
+        \begin{itemize}
+            \item Set of principles of how enemy programs can be evaluated, especially w.r.t. reproducibility.
+            \item An auto-tuning framework to automatically refine enemy programs to enable maximum interference.
+            \item Experimenting the auto-tuning tool on prior work based enemy programs.
+        \end{itemize}
+    
+    \end{frame}
+
+    
+    \begin{frame}{Measuring Interference Reliably}
+
+        Reproducing result of experiment showcasing 300x of slowdown.
+        \begin{itemize}
+            \item Uncontrolled environment.
+            \item Controlled environment.
+            \item Statistical refinement. 
+        \end{itemize}
+
+        %Add here Fig 1 to explain what each bar in the graph represents.
+        %(a) is original experiment result.
+        %(b) is result reproduced in uncontrolled environment.
+        %(c), (d), (e) is result in a controlled environment (throttling, scaling, fully controlled).
+        %(f) statistical approach.
+
+    \end{frame}
+
+    %Uncontrolled environment
+    \begin{frame}{Uncontrolled Environment}
+
+    \end{frame}
+
+    %Controlled Environment
+    \begin{frame}{Controlled Environment}
+
+        %Several parts to this 
+            %Frequency throttling
+                %Add Fig 2 to show its effect.
+            %Power-save mode by operating system.
+            %Cache warmth
+            %Thread assignment.
+            %Affinity setting.
+            %Avoiding pre-emption from OS. 
+            %Ensuring parallel execution.
+    \end{frame}
+
+    %Statistical refinement
+    \begin{frame}
+
+        %Quite a few outlier readings.
+        %Mostly due to unforseen circumstances.
+        %Percentile method to eliminate outliers.
+
+    \end{frame}
+
+    
+
+\end{document}
