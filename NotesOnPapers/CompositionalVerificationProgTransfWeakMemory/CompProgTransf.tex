@@ -1,0 +1,121 @@
+\documentclass[xcolor=dvipsnames, notes]{beamer}
+
+\usetheme{Warsaw}
+
+\usepackage{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+\newcommand{\po}{\textcolor{BlueViolet}{po}}
+\newcommand{\rf}{\textcolor{Green}{rf}}
+\newcommand{\co}{\textcolor{BurntOrange}{co}}
+\newcommand{\mo}{\textcolor{Red}{mo}}
+\newcommand{\hb}{\textcolor{NavyBlue}{hb}}
+\newcommand{\fr}{\textcolor{RubineRed}{fr}}
+\newcommand{\xhb}{\textcolor{NavyBlue}{xhb}}
+\newcommand{\rfe}{\textcolor{Green}{rfe}}
+\newcommand{\rfi}{\textcolor{Green}{rfi}}
+\newcommand{\sw}{\textcolor{BurntOrange}{sw}}
+\newcommand{\jhb}{\textcolor{NavyBlue}{jhb}}
+\newcommand{\jmo}{\textcolor{Red}{jmo}}
+\newcommand{\eco}{\textcolor{WildStrawberry}{eco}}
+
+
+\title{Compositional Verification of Compiler Optimizations on Relaxed Memory}
+\subtitle{Mike Dodds, Mark Batty and Alexey Gotsman}
+
+\author{Presented by \\ Akshay Gopalakrishnan}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \maketitle
+    \end{frame}
+
+    \begin{frame}{Introduction}
+        
+        %What this paper is about 
+        %What it tries to show
+        %How in brief
+        %Any tools that we can use
+        %Proofs ? 
+
+    \end{frame}
+
+    \begin{frame}{Program Transformations as Observational Refinements}
+    
+        %One line statement of valid transformation
+        %One line statement on what is an observation 
+        %Observational refinement symbol and statement. 
+
+    \end{frame}
+
+    \begin{frame}{Compositional Reasoning of Tranasformations}
+
+        %Code block and context.
+        %Modified definition of valid transformation.
+
+    \end{frame}
+
+    \begin{frame}{Compositional Verification: Idea}
+
+        %Difficult to determine all possible contexts.
+        %Create an abstraction to consider only relevant contexts (denotation)
+        %Reason about transformations using this abstract context.
+        %Prove Soundness and Completeness.
+
+    \end{frame}
+
+%--------------------------------------------------------------
+
+    \begin{frame}{Denotation of Code Blocks: Block Executions} 
+
+        %Denotation is mainly pertaining to the context the block can have
+
+        %Relevant details for each block execution
+            %Local variables
+            %Global variables -- only concerning ourselves with those global variables that the code block accesses.
+            %Context happens-before --- Any happens-before relations that the context has between its events. 
+            %Context-atomicity ---> SB edges.
+
+    \end{frame}
+
+    \note{
+        We have a code block within which we do some transformation.
+        Now, what external stuff can affect its validity? 
+        The authors defined this as a context, and we record every relevant infromation (which we call denotation) of a context that can affect the transformation we do on the code block. 
+        Note that, the relations we count wrt context does not involve those between context and code block events (like \rf, \hb).
+        We need to keep a note of this, as we do not yet have an intuition as to why they aren't considered.
+    }
+
+    \begin{frame}{Denotation of Code Blocks: Histories}
+        
+
+    \end{frame}
+
+    \begin{frame}{Denotation of Code Blocks: Adequacy and Full Abstraction}
+
+
+    \end{frame}
+
+%--------------------------------------------------------------------------
+
+    \begin{frame}{Road to Finite Contexts: Reason and Plan}
+
+    \end{frame}
+
+    \begin{frame}{Road to Finite Contexts: Cut Predicate for Contexts}
+
+    \end{frame}
+
+    \begin{frame}{Road to Finite Contexts: Deny Edges and Extended Histories}
+
+    \end{frame}
+
+    \begin{frame}{Road to Finite Contexts: Adequate but lack of Full Abstraction}
+
+    \end{frame}
+
+\end{document}
