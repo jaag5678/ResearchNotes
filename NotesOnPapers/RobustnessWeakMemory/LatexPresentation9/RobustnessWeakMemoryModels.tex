@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 
 \newcommand{\po}{\textcolor{BlueViolet}{po}}
+\newcommand{\epo}{\textcolor{BlueViolet}{epo}}
 \newcommand{\xpo}{\textcolor{BlueViolet}{xpo}}
 \newcommand{\rf}{\textcolor{Green}{rf}}
 \newcommand{\co}{\textcolor{BurntOrange}{co}}
@@ -62,7 +63,7 @@
         As an example, consider robustness of programs running on ARM against x86. 
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics{LB_SB_ROBUSTNESS_EX.PNG}
+                \includegraphics[scale=0.6]{LB_SB_ROBUSTNESS_EX.PNG}
             }
         \end{figure}
         %Explain that TSO exhibits SB but SC does not. Which means SB-TSO is not Robust against SC.
@@ -123,8 +124,6 @@
             \item $\rmw \cap \fre;\coe = \phi$.
         \end{itemize}
 
-        %TSO definition
-
     \end{frame}
 
     \begin{frame}{x86-TSO}
@@ -149,15 +148,46 @@
     \begin{frame}{Robustness Conditions: Intuition}
 
         %mention the Paragraph based intuition on page 4 just before the Robustness conditions.
+        The authors tackle only SC, x86-TSO, ARMv7 and ARMv8 models.
+        All of the above models respect coherence. 
+        If for instance robustness fails to hold, then we have some K-consistent execution to violate an axiom of memory model M.
+        Since our axioms are all acyclic/irreflexivity conditions, this implies the execution graph has some form of cycle. 
+        Note that, if the cycle contains no {\po} edges, then with the remaining edges ({\rfe}, {\fre}, {\coe}), the cycle also results in coherence violation.
+        Thus, the cycle must contain {\po} edges along with the union of the above (now termed as {\eco}).
+        This set of {\po} edges are defined as extended program order $\epo = \po \cap (codom(\eco) \times dom{\eco})$. 
+        The robustness condition now between each pair of memory model revolves around this newly defined order. 
 
     \end{frame}
 
     \begin{frame}{SC-x86TSO Robustness Condition}
 
-        %For each of the condition (in the union relation), mention intuition as to why it is so.
-        %do this only for SC-TSO as the rest are almost same and personally I do not find it worth going in-depth for each.
+        The intuition behind the following theorem is that, we know for certain because of coherence that a cycle if introduced must have {\po} an exclusive part. 
+        Thus, it is sufficient to place restrictions on this set of {\po} to belong to a fixed set to ensure no cycle can exist. 
+        \begin{theorem}
+            A program P is M-K Robust if in all it's K-consistent executions X, $\epo \subseteq R$ where $R$ is defined for each pair of memory models in question.
+        \end{theorem}
 
+        For SC-x86TSO robustness $R$ is defined as 
+        \begin{align}
+            R = \xpo \cup \po_{l} \cup \imp;\po^{?}.
+        \end{align}
+      
     \end{frame}
+
+    \note{
+        
+
+
+        The intuition behind SC-x86 robustness condition is as follows: 
+        \begin{itemize}
+            \item {\xpo} orders all R-R, R-W and W-W events. These orders does not actually represent the main weakening that makes it TSO. 
+            \item ${\po_{l}}$ If the whole program is surrounding just one memory action, then the program under TSO/SC is the same. 
+            \item ${\imp;\po^{?}}$ Any fence between W-R would imply that R will read from the main memory, just like SC semantics. 
+        \end{itemize}
+        The above three are not the orders that make a Read have a choice to read from its own Write Buffer. 
+        This would be different from SC and thus will not be SC-x86 Robust. 
+        Thus, we require {\epo} to be in the above union of 3 relations.
+    }
 
     \begin{frame}{Checking and Enforcing Robustness}
 
@@ -172,7 +202,21 @@
     \end{frame}
 
     \begin{frame}{Experimental Evaluation}
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{EXP_INTERPRET.PNG}
+            }
+        \end{figure}
+    \end{frame}
 
+    \begin{frame}{Experimental Evaluation Table}
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{EXPERIMENT_SC-x86.PNG}
+            }
+        \end{figure}
+        Author makes note of Cilk-TSO specifically. 
+        Trencher reports violation due to not including ${\po_{l}}$ in condition check. 
     \end{frame}
 
     \begin{frame}{Thank you}
