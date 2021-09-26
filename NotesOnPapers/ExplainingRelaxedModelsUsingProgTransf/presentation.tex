@@ -74,14 +74,94 @@
 
     \begin{frame}{Axiomatic Model Definitions}
 
+        Axiomatic events:
+        \begin{itemize}
+            \item Read event $\Re = Ld \cup U$.
+            \item Write event $W = St \cup U$. 
+            \item Fence - Can be of various types depending on the architecture / language's memory model.
+        \end{itemize}
+
+        Binary relations:
+        \begin{itemize}
+            \item {\po} - Program order per thread.
+            \item {\rf} - Between a read and the write from which its read value comes.
+            \item {\co} - Order between writes/updates to same location.
+            \item {\mo} - Order between memory writes/updates.
+        \end{itemize}
 
     \end{frame}
 
     \begin{frame}{Sequential Consistency (SC)}
+        
+        Additional binary relations:
+        \begin{itemize}
+            \item {\hb} - Happens before $ \hb = (\po \cup \rf)^{+} $
+            \item {\fr} - Reads before (from reads) $ \fr = (\rf^{-1};\mo_{|loc}) $ 
+        \end{itemize}
+
+        SC is defined using the following irreflexivity relations that must hold for any program execution:
+        \begin{tasks}(2)
+            \task {\mo} total order on W/U.
+            \task {\hb} irreflexive.
+            \task {\mo;\hb} irreflexive.
+            \task {\fr;\hb} irreflexive.
+            \task {\fr;\mo} irreflexive.
+            \task {\fr;\mo;\hb} irreflexive.
+        \end{tasks}
+
+    \end{frame}
+
+    \begin{frame}{Figures to explain above axioms of irreflexivity}
+        
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{SC-Def1.PNG}
+            }
+        \end{figure}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{SC-Def2.PNG}
+            }
+        \end{figure}
 
     \end{frame}
 
     \begin{frame}{Total Store Order (TSO)}
+
+        Additional binary relations:
+        \begin{itemize}
+            \item {\xhb} - Happens before $ \xhb = (\po \cup \rf)^{+} $
+            \item {\fr} - Reads before (from reads) $ \fr = (\rf^{-1};\mo_{|loc}) $ 
+            \item {\rfe} - Reads from external $\rf \text{ \textbackslash} \ \po$
+        \end{itemize}
+
+        x86 TSO is defined using the following irreflexivity relations that must hold for any program execution:
+        \begin{tasks}(2)
+            \task {\mo} is a strict total order on W/U/F.
+            \task {\xhb} irreflexive.
+            \task {\mo;\xhb} irreflexive.
+            \task {\fr;\xhb} irreflexive.
+            \task {\fr;\mo} irreflexive.
+            \task {\fr;\mo;\rfe;\po} irreflexive.
+            \task {\fr;\mo;$[U \cup F]$;\po} irreflexive.
+        \end{tasks}
+
+    \end{frame}
+
+    \begin{frame}{Figures to explain the last two axioms of irreflexivity.}
+            
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{TSO-Def1.PNG}
+            }
+        \end{figure}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{TSO-Def2.PNG}
+            }
+        \end{figure}
 
     \end{frame}
 
@@ -119,26 +199,57 @@
 
     \begin{frame}{Release Acquire (RA)}
 
+        This model exhibits non-multi-copy-atomicity, meaning, threads may observe updates/writes in different orders.
+        Here {\mo} is defined only between events W/U accessing the same memory.
+        The axioms then are as follows:
+        \begin{tasks}(2)
+            \task {\mo} disjoint union of relations $\mo_{x}$ each of which are strict total orders. 
+            \task {\hb} irreflexive.
+            \task {\mo;\hb} irreflexive.
+            \task {\fr;\hb} irreflexive.
+            \task {\fr;\mo} irreflexive.
+        \end{tasks}
+        where {\hb}, {\fr} are as that of Sequential consistency.
+
     \end{frame}
 
     \begin{frame}{Why RA cannot be described the same way}
 
         %Insert IRIW example here to show cannot be described by SC/TSO
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{IRIW_RA.PNG}
+            }
+        \end{figure}
+
+        %Insert IRIW example here to show how sequentialization works 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{IRIW_SEQ.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
     \begin{frame}{Why RA cannot be described the same way}
         
         %Insert example showing no sound transformation of RA can explain the behavior
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{NOTRANSF_RA.PNG}
+            }
+        \end{figure}
 
     \end{frame}
 
     \begin{frame}{Similar Analysis for POWER and ARMv7/v8}
         
-        %POWER can be specified using SPOWER, whose only difference is it disallows $\po \cup \rf$ cycles.
-        %Then POWER is equivalent to reordering over SPOWER (you keep reordering until only dependency order = program order).
-
-        %ARM cannot be specified in a similar way (perhaps refer to figure in notes section that cannot be explained by program transformations)
-
+        \begin{itemize}
+            \item POWER can be specified using SPOWER, whose only difference is it disallows $\po \cup \rf$ cycles.
+            \item Then POWER is equivalent to reordering over SPOWER (you keep reordering until only dependency order = program order).
+            \item ARM cannot be specified in a similar way (perhaps refer to figure in notes section that cannot be explained by program transformations)
+        \end{itemize}
+        
     \end{frame}
 
     \begin{frame}{Advantage of Transformational Models: Compiler Correctness}
@@ -159,7 +270,7 @@
         \begin{align*}
             \forall P_{C}.[[compile(P_{C})]]_{M_{A}} \ 
                 \subseteq \ 
-            \union \{[[P'_{A}]]_{SM_{A}} | P'_{A}. compile(P_{C}) \longmapsto^{*}_{M_{A}} P'_{A} \}.  
+            \cup \{[[P'_{A}]]_{SM_{A}} | P'_{A}. compile(P_{C}) \longmapsto^{*}_{M_{A}} P'_{A} \}.  
         \end{align*}  
         where $SM_{A}$ is the stronger memory model than $M_{A}$ (like SC for TSO in Theorem 1).
 

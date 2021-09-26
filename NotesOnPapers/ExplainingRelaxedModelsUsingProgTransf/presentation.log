@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  25 SEP 2021 19:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  26 SEP 2021 09:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1148,7 +1148,16 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [3
 
 ]
-Underfull \hbox (badness 10000) detected at line 78
+LaTeX Font Info:    Try loading font information for U+msa on input line 92.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 92.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) detected at line 92
  [] 
  []
 
@@ -1160,7 +1169,7 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [4
 
 ]
-Underfull \hbox (badness 10000) detected at line 82
+Underfull \hbox (badness 10000) detected at line 112
  [] 
  []
 
@@ -1172,7 +1181,18 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [5
 
 ]
-Underfull \hbox (badness 10000) detected at line 86
+<SC-Def1.PNG, id=167, 389.65575pt x 120.45pt>
+File: SC-Def1.PNG Graphic file (type png)
+<use SC-Def1.PNG>
+Package pdftex.def Info: SC-Def1.PNG  used on input line 128.
+(pdftex.def)             Requested size: 194.8274pt x 60.22484pt.
+<SC-Def2.PNG, id=169, 364.9635pt x 112.62074pt>
+File: SC-Def2.PNG Graphic file (type png)
+<use SC-Def2.PNG>
+Package pdftex.def Info: SC-Def2.PNG  used on input line 128.
+(pdftex.def)             Requested size: 182.4813pt x 56.31023pt.
+
+Underfull \hbox (badness 10000) detected at line 128
  [] 
  []
 
@@ -1183,17 +1203,18 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 
 [6
 
-]
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+ <./SC-Def1.PNG> <./SC-Def2.PNG>]
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 150
+.
+LaTeX Font Info:    No file OMScmss.fd. on input line 150.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) detected at line 96
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbackslash' on input line 150.
+
+
+Underfull \hbox (badness 10000) detected at line 150
  [] 
  []
 
@@ -1205,7 +1226,18 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [7
 
 ]
-Underfull \hbox (badness 10000) detected at line 112
+<TSO-Def1.PNG, id=225, 340.27126pt x 127.677pt>
+File: TSO-Def1.PNG Graphic file (type png)
+<use TSO-Def1.PNG>
+Package pdftex.def Info: TSO-Def1.PNG  used on input line 166.
+(pdftex.def)             Requested size: 170.13521pt x 63.83833pt.
+<TSO-Def2.PNG, id=226, 243.91125pt x 127.677pt>
+File: TSO-Def2.PNG Graphic file (type png)
+<use TSO-Def2.PNG>
+Package pdftex.def Info: TSO-Def2.PNG  used on input line 166.
+(pdftex.def)             Requested size: 121.95532pt x 63.83833pt.
+
+Underfull \hbox (badness 10000) detected at line 166
  [] 
  []
 
@@ -1216,8 +1248,8 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 
 [8
 
-]
-Underfull \hbox (badness 10000) detected at line 118
+ <./TSO-Def1.PNG> <./TSO-Def2.PNG>]
+Underfull \hbox (badness 10000) detected at line 176
  [] 
  []
 
@@ -1229,7 +1261,7 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [9
 
 ]
-Underfull \hbox (badness 10000) detected at line 122
+Underfull \hbox (badness 10000) detected at line 192
  [] 
  []
 
@@ -1241,7 +1273,7 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [10
 
 ]
-Underfull \hbox (badness 10000) detected at line 127
+Underfull \hbox (badness 10000) detected at line 198
  [] 
  []
 
@@ -1253,7 +1285,7 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [11
 
 ]
-Underfull \hbox (badness 10000) detected at line 133
+Underfull \hbox (badness 10000) detected at line 214
  [] 
  []
 
@@ -1265,7 +1297,18 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [12
 
 ]
-Underfull \hbox (badness 10000) detected at line 142
+<IRIW_RA.PNG, id=364, 470.35725pt x 72.87225pt>
+File: IRIW_RA.PNG Graphic file (type png)
+<use IRIW_RA.PNG>
+Package pdftex.def Info: IRIW_RA.PNG  used on input line 232.
+(pdftex.def)             Requested size: 282.21652pt x 43.72368pt.
+<IRIW_SEQ.PNG, id=365, 750.4035pt x 110.21175pt>
+File: IRIW_SEQ.PNG Graphic file (type png)
+<use IRIW_SEQ.PNG>
+Package pdftex.def Info: IRIW_SEQ.PNG  used on input line 232.
+(pdftex.def)             Requested size: 375.20084pt x 55.10573pt.
+
+Underfull \hbox (badness 10000) detected at line 232
  [] 
  []
 
@@ -1276,8 +1319,14 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 
 [13
 
-]
-Underfull \hbox (badness 10000) detected at line 154
+ <./IRIW_RA.PNG> <./IRIW_SEQ.PNG>]
+<NOTRANSF_RA.PNG, id=395, 366.77025pt x 125.87025pt>
+File: NOTRANSF_RA.PNG Graphic file (type png)
+<use NOTRANSF_RA.PNG>
+Package pdftex.def Info: NOTRANSF_RA.PNG  used on input line 243.
+(pdftex.def)             Requested size: 220.06384pt x 75.52272pt.
+
+Underfull \hbox (badness 10000) detected at line 243
  [] 
  []
 
@@ -1288,26 +1337,8 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 
 [14
 
-]
-! Undefined control sequence.
-<argument> ...]]_{M_{A}} \^^M\subseteq \^^M\union 
-                                                  \{[[P'_{A}]]_{SM_{A}} | P'...
-l.166     \end{frame}
-                     
-? 
-! Undefined control sequence.
-<argument> ...]]_{M_{A}} \^^M\subseteq \^^M\union 
-                                                  \{[[P'_{A}]]_{SM_{A}} | P'...
-l.166     \end{frame}
-                     
-? 
-
-Overfull \hbox (4.77704pt too wide) detected at line 166
-[]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 166
+ <./NOTRANSF_RA.PNG>]
+Underfull \hbox (badness 10000) detected at line 253
  [] 
  []
 
@@ -1319,7 +1350,7 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [15
 
 ]
-Underfull \hbox (badness 10000) detected at line 176
+Underfull \hbox (badness 10000) detected at line 265
  [] 
  []
 
@@ -1331,7 +1362,12 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [16
 
 ]
-Underfull \hbox (badness 10000) detected at line 182
+Overfull \hbox (12.07706pt too wide) detected at line 277
+[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 277
  [] 
  []
 
@@ -1343,6 +1379,30 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 [17
 
 ]
+Underfull \hbox (badness 10000) detected at line 287
+ [] 
+ []
+
+
+Overfull \hbox (13.57828pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[18
+
+]
+Underfull \hbox (badness 10000) detected at line 293
+ [] 
+ []
+
+
+Overfull \hbox (13.57828pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[19
+
+]
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
 
@@ -1352,22 +1412,26 @@ Overfull \hbox (13.57828pt too wide) has occurred while \output is active
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 184.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 184.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 184.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 184.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
  ) 
 Here is how much of TeX's memory you used:
- 26213 strings out of 494923
- 519137 string characters out of 6180742
+ 26269 strings out of 494923
+ 520025 string characters out of 6180742
  576519 words of memory out of 5000000
- 29056 multiletter control sequences out of 15000+600000
+ 29098 multiletter control sequences out of 15000+600000
  536890 words of font info for 46 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 48i,15n,57p,10358b,595s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,15n,57p,10358b,594s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texl
@@ -1376,10 +1440,10 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy8.pfb>
-Output written on presentation.pdf (17 pages, 114634 bytes).
+Output written on presentation.pdf (19 pages, 201638 bytes).
 PDF statistics:
- 520 PDF objects out of 1000 (max. 8388607)
- 474 compressed objects within 5 object streams
- 35 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 592 PDF objects out of 1000 (max. 8388607)
+ 529 compressed objects within 6 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
