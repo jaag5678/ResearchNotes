@@ -1,0 +1,224 @@
+\documentclass[notes, xcolor = dvipsnames]{beamer}
+
+\usetheme{Warsaw}
+
+\usepackage{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\title{Towards Transformational Specification of Relaxed Memory Models}
+
+\author{Presentation by Akshay Gopalakrishnan \\ Supervised by Clark Verbrugge}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \maketitle
+
+    \end{frame}
+
+    \begin{frame}{Introduction}
+
+        %What are memory models.
+        %Common problems with them addressed for each model designed 
+            %-- eg: Compiler mappings correctness, Program Transformations, Robustness, Verification, etc 
+        %Existing specification of models
+            % Axiomatic per execution style
+            % Operational 
+            % Recent one -- Event structures
+        %Importance of such semantic models.
+            % Formal mathematical definitions of intended behaviors.
+            % Verification - not our focus.
+            % Help prove program transformations sound. 
+            % Identify other problems with the model -- Out-of-thin-air
+        %What it is lacking. 
+            % Often not that intuitive
+            % AXiomatic model involves several relations over events and the axioms itself are complex irreflexivity relations.
+            % Operational models are abstract and could be intuitive but difficult to rely on while programming. 
+            % Each model has to be proven separately for program transformations -- (WHAT DOES THIS MEAN?)
+
+    \end{frame}
+
+    \begin{frame}{Constructing models using program transformations: Goal}
+
+        %Primary vision 
+            % Towards identifying minimal set of transformations that can identify all weak memory behaviors
+            % This minimal set can then be used to construct all possible memory consistency models.
+            %Minimal set to perform testing of such concurrency models. 
+
+        %Having a transformational model 
+            % We start by designing memory models specified by a set of transformations allowed over a base model 
+            % Doing this will give us a hierarchical structure of memory models w.r.t. program transfomraitons.
+            % Intuitive to rely on by able to program justifying each outcome by some combination of program transformations.
+    \end{frame}
+
+    \begin{frame}{Idea}
+
+        %A way to construct such models using only set of transformations.
+
+        %A baseline model to be considered - Currently a per-execution axiomatic model (set of axioms)
+            %Base model does not allow the set of transformations we would want to allow. 
+            %Allowing a transformation will bring changes to set of axioms (irreflexivity relations may change) or relax certain partial orders defined for the axioms.
+            %Resulting model is the new one with the program transformations. 
+        %Each transformed model is to be proved weaker than the original model in terms of observable behaviors.
+        % The transformation added also to be proved sound under the transformed model.
+        % Model also to be proved optimal/complete (ask viktor/clark/mark about this wording) to ensure the "weakening" is not too much of the base model 
+
+    \end{frame}
+
+    \begin{frame}{Simplicity}
+
+        %Compositional in nature 
+            %Intend to investigate whether one can construct models by taking union of their program transformations 
+                %Model M1 with set T1 plus model M2 with set T2 == Model M3 with set T1 + T2.
+            %Having a hierarchical structure of such memory models purely built on program transformations. 
+             
+        %PErhaps attach a figure here.
+            % A venn diagram showing clear subset relations that hold in terms of observable behaviors of base model vs other transformed models.
+            % Compare and contrast this with the Java memory model diagram shared by Clark. 
+    \end{frame}
+
+    \begin{frame}{Possible Advantages - Theoretical}
+
+        %Compiler Correctness - mapping proofs.
+        %Robustness conditions to enforce portability of programs.
+        %Compositional correctness
+
+        %For each of them, prepare a set of slides
+    \end{frame}
+
+    \begin{frame}{Compiler Correctness}
+        
+        %If source and target model are both defined using base model M
+            % Then consider cases of the transformation sets 
+            % Transcribe from ipad notes of this
+
+    \end{frame}
+
+    \begin{frame}{Robustness Conditions}
+        
+        %Analyze directly the transformation sets 
+
+
+    \end{frame}
+
+    \begin{frame}{Compositional Correctness}
+        
+        % Compositonal reasoning can be bypassed if 
+            % Both memory models under which a single program is going to be run in parts can be described using same base model M.
+            % Take the intersection of their transformation sets and the intersection model is what we need to check correctness with. 
+
+    \end{frame}
+
+    \begin{frame}{Elements to define models} 
+
+        %Need 
+            %A precise set of axiomatic events - R/W/U/Frr/Frw/Fwr/Fww
+            %Atomic accesses U 
+            %Non-Atomic variants R/W
+            %Fence variants Frr/Frw/Fwr/Fww
+            %Misc instructions - ask viktor/clark/mark
+
+    \end{frame}
+
+    \begin{frame}{Constructing base model}
+
+        %Start with a standard base model (eg: Sequential consistency)
+        %Define the base model using our elements 
+        %Prove equivalence to existing axiomatic model in literature. 
+
+    \end{frame}
+
+    \begin{frame}{Establishing Equivalence} 
+
+        %Build various models using base model and different sets of transformations.
+        %Test equivalence to existing standard models (TSO, RA, ARM, POWER, etc) using our approach.
+        %If equivalent, we have a more intuitive model for each of the standard ones. 
+        %If not, we establish the possible space of models that can be constructed this way. 
+
+    \end{frame}
+
+    %-------------------------------------------------------------------------------------------
+
+    \begin{frame}{Challenges: Part 1}
+
+        %Identify the axiomatic elements using which we construct our base models and the transformational ones
+            %Should technically account for most(ideally all) features in existing standard relaxed memory models
+            %Elements should be independent of each other. (dependency will create redundancy while constructing axioms)
+
+            %Can start off with just simple read/writes and four types of fences as defined in Doug Lea's cookbook.
+
+        %Identify different partial/total orders required
+            %ideally start off with preliminary ones.
+            %Build as required.
+            %May make the model more complicated aS we add on program transformations
+
+            %Start with po, rf, mo, rb. 
+            %Next one should strongly be hb.
+ 
+    \end{frame}
+    
+    \begin{frame}{Challenges: Part 2}
+
+        %Set of transformations
+            %Mostly local 
+                %Also need to identify the granularity in each transformation (eg: Reordering how many variants? R-R, R-W, W-R, W-W or more than that)
+                %Other than reordering, elimination, introduction what other local transformations are base ones?
+                %For each local transformation, make sure that it is only w.r.t consecutive memory accesses (or redundant fences between them)
+                %This is because the non-consecutive one is just a direct inductive variant of the consecutive ones. 
+            
+            %Possible non-local 
+                %Sequentialization - merging code of two threads in either order.
+                %Parallelization - splitting a code into two threads (may not be safe in any sense)
+                %Other possibilities? Need to tread carefully as such transformations are non-trivial to understand and may affect our model construction heavily. 
+                %Having a formal definition of when we do such transformations is going to be a non-trivial endeavor. There could be many variants.
+                %Ideally, the goal is to address non-local transformations only when the local ones are all wrapped up formally and proven.
+
+    \end{frame}
+
+    \begin{frame}{Challenges: Part 3}
+
+        %Defining what a transformation does.
+            %based on definition, changing axiomatic definitions or modifying axioms of irreflexivity. 
+            %Will definitely first change the axioms, then for convenience can add additional definitions of partial orders (like extended coherence order, writes before and what-not)
+            %May need Clark's help for this phase as it can quickly go out of control.
+
+        %Set of axioms
+        %Can have various axiomatic models for same base model
+        %Set of axioms should as far as possibly reflect the variants of transformations disallowed by the model itself.
+        %We can start off with taking model definitions from Viktor and Ori's work.
+
+        %In that way, allowing a transformation will ensure minimal changes in the axiomatic definition (eg: just removal of one axiom)
+        %True, but it may be difficult to define the model itself as a whole, so it will be a delicate interplay between both.
+
+    \end{frame}
+
+    \begin{frame}{Challenges: Part 4}
+
+        %Possibly, existing standard models may not be defined in such a way
+        %Problem comes as it may be that base model M allows set T and transformed model allows T + T1, but standard model allows only T1. 
+        %Then should our base model be that specific standard model? 
+
+        %Refer to Viktor and Ori's work for more insight on this
+        %Their work has proof (by counter example) that TSO cannot be defined the way we are going about, as Sequentialization is unsound under TSO but sound under SC. 
+        %However, we did notice that while they discarded the possibility of defining RA being reducible (by applying sound transformations) to SC or TSO, the counter examples could be easily explained via coherence. 
+        %Is it then that Coherence model is reducible to RA and models like POWER? (can perhaps ask Viktor and maybe consider doing this as a collaborative work with him)
+
+        %Additionally, it could also be that RA can be considered as a Base model to derive Coherence by adding transformations. 
+        %Is it then possible to observe any relations between multiple base models in terms of their transformation sets? 
+        %This is yet to be seen and can provide really important insight, which Viktor and Ori's work has just scraped about.
+
+    \end{frame}
+
+    %Related work needs to be listed perhaps?
+    \begin{frame}{Misc}
+
+    \end{frame}
+
+    \begin{frame}{Thank you}
+        Questions?
+    \end{frame}
+
+\end{document}
