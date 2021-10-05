@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  3 OCT 2021 19:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  4 OCT 2021 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,6 +887,10 @@ Overfull \hbox (14.63037pt too wide) has occurred while \output is active
 [4
 
 ]
+
+LaTeX Warning: Citation `Lamport79' on page 5 undefined on input line 66.
+
+
 Overfull \hbox (25.87634pt too wide) has occurred while \output is active
  [][]  
  []
@@ -1055,6 +1059,186 @@ Overfull \hbox (14.63037pt too wide) has occurred while \output is active
 [18
 
 ]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[19
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[20
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[21
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[22
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[23
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[24
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[25
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[26
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[27
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[28
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[29
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[30
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[31
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[32
+
+]
+Overfull \hbox (25.87634pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+
+Overfull \hbox (14.63037pt too wide) has occurred while \output is active
+ [][][][] 
+ []
+
+[33
+
+]
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
 
@@ -1064,29 +1248,35 @@ Overfull \hbox (14.63037pt too wide) has occurred while \output is active
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 224.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 224.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 319.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 319.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 224.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 224.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 319.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 319.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 16937 strings out of 494923
- 322472 string characters out of 6180742
+ 17009 strings out of 494923
+ 323845 string characters out of 6180742
  393386 words of memory out of 5000000
- 19852 multiletter control sequences out of 15000+600000
- 5452 words of font info for 20 fonts, out of 8000000 for 9000
+ 19892 multiletter control sequences out of 15000+600000
+ 6102 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 48i,15n,51p,779b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,15n,57p,779b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb>
-Output written on presentation.pdf (18 pages, 66053 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb>
+Output written on presentation.pdf (33 pages, 112140 bytes).
 PDF statistics:
- 525 PDF objects out of 1000 (max. 8388607)
- 485 compressed objects within 5 object streams
- 37 named destinations out of 1000 (max. 500000)
- 73 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 937 PDF objects out of 1000 (max. 8388607)
+ 875 compressed objects within 9 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 79 words of extra memory for PDF output out of 10000 (max. 10000000)
 

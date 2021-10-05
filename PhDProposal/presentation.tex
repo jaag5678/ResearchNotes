@@ -19,9 +19,11 @@
 
     \end{frame}
 
+    
     \begin{frame}{Introduction}
 
         %What are memory models.
+            % Give examples of SB, MP, LB, etc and relate them to existing hardwares 
         %Common problems with them addressed for each model designed 
             %-- eg: Compiler mappings correctness, Program Transformations, Robustness, Verification, etc 
         %Existing specification of models
@@ -40,6 +42,103 @@
             % Each model has to be proven separately for program transformations -- (WHAT DOES THIS MEAN?)
 
     \end{frame}
+
+    \begin{frame}{Intro}
+        
+        Almost every system we use for our day-to-day lives rely on concurrent computation. 
+        Right from our mobile phones to our personal desktop which can seemingly perform multiple tasks at the same time, concurrent computations have become part of our daily life.
+        The amount of performance concurrent computation has given us is something that is near impossible to part with. 
+        But an important question remains, can we understand and utilize concurrency at its best for the various domain specific compuatations we intend to do?
+    
+    \end{frame}
+
+    \begin{frame}{What are Memory Models?}
+    
+        Concurrent programs take advantage of \textit{out-of-order} execution. 
+        Intuitively, this means that more than one unrelated computations can be done ``simultaneously'' without having any fixed order in which they should happen.
+        This results in concurrent programs having multiple different outcomes.
+        In terms of concurrenct compuations using shared memory, the possible outcomes are described by
+        a \textit{memory consistency model}.
+    
+    \end{frame}
+
+    \begin{frame}{The inclination towards Sequential Reasoning}
+
+        Despite the elaborate different ways in which we can think of writing programs that leverage the \textit{out-of-order} notion, most programmers are accustomed to reasoning about computations sequentially. 
+        Sequential Consistency(SC), which was a memory model first formulated by Lamport et al.~\cite{Lamport79}, gives programmers this exact sequential reasoning for their programs running in a multiprocessor environment.
+        
+    \end{frame}
+
+    \begin{frame}{Current Hardwares - the thrist for performance}
+
+        Though SC seems to be a very intuitive way to reason about programs using shared memory, it does not reflect how different processors do their computation.
+        Hardwares in today's era have multiple features such as caches, read/write buffers, speculative execution, etc. which are designed to give us the performance we quite often take for granted these days.
+        Usage of such features however, does not respect SC reasoning.
+        
+    \end{frame}
+
+    \begin{frame}{Example: Message Passing}
+        
+    \end{frame}
+
+    \begin{frame}{Example: Store Buffering}
+        
+    \end{frame}
+
+    \begin{frame}{Example: Load Buffering}
+        
+    \end{frame}
+
+    \begin{frame}{Example: Non-Multi-Copy Atomic Behavior}
+        
+    \end{frame}
+
+    %Place some Misc example from POWER paper if required.
+
+    \begin{frame}{Common Problems Associated with Relaxed Memory Models}
+        
+        \begin{itemize}
+            \item Informal specifications.
+            \item Correctness of Compiler Mappings.
+            \item Correctness of Program Transformations.
+            \item Robustness Analysis.
+            \item Compositional Correctness.
+            \item Verification. 
+        \end{itemize}
+        
+        %Hardware models have historically suffered from informal specifications. 
+        %This makes it impossible to carefully use program constructs to use such relaxed behaviors.
+        %In addition, having relaxed memory models for high level languages have brought upon concerns regarding correct Compiler Mappings to ensure the hardware does not execute our program incorrectly.
+        %Additionally, compiler optimizations also have become a topic of correctness checking as almost all optimizations designed for performance are made for only sequential code. 
+        %Thus, proving such optimizations at the base level (eg: Simple reordering, Elimination, etc) is required to assess the correctness of elaborate transformations like partial redundancy elimination, loop invariant code motion, etc. 
+
+    \end{frame}
+
+    \begin{frame}{Informal Specifications}
+        
+    \end{frame}
+
+    \begin{frame}{Correctness of Compiler Mappings}
+        
+    \end{frame}
+
+    \begin{frame}{Correctness of Program Transformations}
+        
+    \end{frame}
+
+    \begin{frame}{Robustness}
+        
+    \end{frame}
+
+    \begin{frame}{Compositional Correctness}
+    
+    \end{frame}
+
+    \begin{frame}{Verification}
+        
+    \end{frame}
+
+    %-----------------------------------------------------------------------------------------------------------------------
 
     \begin{frame}{Constructing models using program transformations: Goal}
 
@@ -208,7 +307,7 @@
 
         %Additionally, it could also be that RA can be considered as a Base model to derive Coherence by adding transformations. 
         %Is it then possible to observe any relations between multiple base models in terms of their transformation sets? 
-        %This is yet to be seen and can provide really important insight, which Viktor and Ori's work has just scraped about.
+        %This is yet to be seen and can provide really important insight, which Viktor and Ori's work has just scraped about.   
 
     \end{frame}
 
