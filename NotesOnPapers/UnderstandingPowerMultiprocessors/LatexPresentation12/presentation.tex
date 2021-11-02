@@ -1,0 +1,75 @@
+\documentclass[notes, xcolor=dvipsnames]{beamer}
+
+\usetheme{Warsaw}
+
+\usepackage{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\title{Understanding POWER Multiprocessors}
+\subtitle{Sushmit Sarkar, Peter Sewell, Jade Alglave, Luc Maranget, Derek Williams}
+
+\author{Presented by \\ Akshay Gopalakrishnan}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \maketitle
+
+    \end{frame}
+
+    \begin{frame}{Introduction}
+
+        \begin{itemize}
+            \item Much of the performance in hardware comes due to features such as Read/Write buffers, Speculation, Caches, etc.
+            \item The behavior of execution of programs utilizing all such features in a hardware can be defined by a relaxed memory consistency model.
+            \item ARM, x86, POWER.. all these hardware exhibit relaxed behaviors.
+            \item Of these POWER is relatively well understood.
+            \item Major reason is due to informal specification and behaviors described only via litmus tests. 
+            \item Continual hardware improvements in POWER also have resulted in more relaxed behaviors.
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Goal}
+
+        \begin{itemize}
+            \item This paper analyzes the POWER multiprocessor family for relaxed behaviors explain their discovered behaviors via an Abstract Machine.
+            \item This helps in avoiding getting involved in the complexities of hardware itself while all the way understanding the weak beahviors exhibited by them.
+            \item The abstract machine has only one storage subsystem while having read/write buffers for each thread.
+        \end{itemize}
+        
+    \end{frame}
+
+    %Start with some preliminary definitions of orders 
+    \begin{frame}{Preliminary Definitions}
+        
+    \end{frame}
+
+    \begin{frame}{Example 1: Message Passing}
+
+    \end{frame}
+
+    \begin{frame}{Example 2: Store Buffering}
+        
+    \end{frame}
+
+    \begin{frame}{Example 3: IRIW}
+
+    \end{frame}
+
+    \begin{frame}{Use of Synchronization and other Barriers}
+        
+    \end{frame}
+
+    %From here on the examples involve sync/data/addr/ctrl dependencies.
+    %Make sure to understand their differences to observe the examples in detail.
+    \begin{frame}{MP + sync}
+        
+    \end{frame}
+
+
+
+\end{document}

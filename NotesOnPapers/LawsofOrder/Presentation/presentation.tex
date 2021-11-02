@@ -1,0 +1,117 @@
+\documentclass[notes, xcolor=dvipsnames]{beamer}
+
+\usetheme{Warsaw}
+
+\usepackage{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+\title{Laws of Order: Expensive Synchronization in Concurrent Algorithms Cannot be Eliminated}
+\subtitle{hagit A, Rachid G, Danny H, Petr K, Maged M, Martin V}
+
+\author{Presented by \\ Akshay Gopalakrishnan}
+
+\begin{document}
+    
+    \begin{frame}
+
+        \maketitle
+
+    \end{frame}
+
+
+    \begin{frame}{Introduction}
+        \begin{itemize}
+            \item Designing Concurrent Algorithms with good performance is a non-trivial tasks.
+            \item Major part of slowdown is due to synchronization.
+            \item Hence efforts are made to remove such costly synchronizations.
+            \item This paper shows that it is impossible to remove completely all expensive synchronization primitives for a class of concurrent implementations.
+            \item Such a result helps designers to assert when they can stop improving an algorithm this way.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Summary of Results}
+
+        The results are based on the usage of atomic Read-after-Write and Write-after-Read operations. 
+        The authors show that without using the above primitives, it is: 
+        \begin{itemize}
+            \item Impossible to build a linearizable implementation that is non-commutative and respects deterministic sequential specification. 
+            \item Impossible to build an algorithm that respects mutual exclusion and is deadlock-free. 
+        \end{itemize}
+        
+    \end{frame}
+
+    \begin{frame}{Mutual Exclusion}
+        
+        Given $N$ processes, each of which accesses a critical section by acquiring a lock, mutual exclusion requires 
+        \center{No more than one process can be in the critical section at the same time}
+
+    \end{frame}
+
+    \begin{frame}{Proof intuition}
+
+        Proof by contradiction.
+        Part 1:
+        \begin{itemize}
+            \item Assume that we do not use a shared write updating the lock. 
+            \item Then this would imply more than one thread can be in the critical section. 
+        \end{itemize}
+
+        Part 2:
+        \begin{itemize}
+            \item Assume that we do not use ARAW or AWAR as part of the lock implementation. 
+            \item Then this would imply more than one thread can read concurrently the same lock and be ready to acquire the lock (update the lock variable).
+            \item Then one thread can acquire the lock (by updating the lock variable). 
+            \item After which another thread can also acquire the lock (by updating lock variable too!). 
+            \item Thu, violating mutual exclusion.
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Linearizability}
+
+        An algorithm is linearizable w.r.t a sequential specification if
+        \center{Each execution of an algorithm is equivalent to some sequential execution of that specification, where the order between non-overlapping methods is preserved.}
+        
+        Note: Not all linearizable algorithms need to use RAW/WAR. Only some, which have two properties.
+
+    \end{frame}
+
+    \begin{frame}{Two Properties of Linearizable Algorithms that must use RAW/WAR}
+        
+        \begin{itemize}
+            \item Deterministic Sequential Specification.
+            \item Strongly non-commutative methods.
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Proof Intuition}
+        
+    \end{frame}
+
+    \begin{frame}{Examples of strongly non-commutative methods}
+        %Take two to three key examples
+    \end{frame}
+
+    \begin{frame}{Formal proof elements}
+        
+        \begin{itemize}
+            \item Formal language with transition semantics.
+            \item Formal definition for executions.
+            \item Notion of histories as sub-executions (traces).
+            \item Proving both above claims in the same flow using these formal elements. 
+        \end{itemize}
+
+    \end{frame}
+    
+    \begin{frame}{Conclusion}
+        
+    \end{frame}
+
+    \begin{frame}{Thank you}
+        Questions? 
+    \end{frame}
+
+\end{document}
