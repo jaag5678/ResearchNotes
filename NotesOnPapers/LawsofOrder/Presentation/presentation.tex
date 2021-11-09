@@ -81,18 +81,53 @@
     \begin{frame}{Two Properties of Linearizable Algorithms that must use RAW/WAR}
         
         \begin{itemize}
-            \item Deterministic Sequential Specification.
-            \item Strongly non-commutative methods.
+            \item Deterministic Sequential Specification - Executing one step of program from same state should yield same result all the time.
+            \item Strongly non-commutative methods - Methods whose execution influences further call to the same method.
         \end{itemize}
 
     \end{frame}
 
     \begin{frame}{Proof Intuition}
-        
+
+        For this, let us consider a simple example of a set data-structure, which has three methods: 
+        \begin{itemize}
+            \item \textit{contains(k)} - $\{ ret = (k \in A) \wedge (S=A) \}$.
+            \item \textit{remove(k)} - $\{ ret = (k \in A) \wedge (S=A \setminus \{k\}) \}$.
+            \item \textit{add(k)} - $\{ ret = (k \notin A) \wedge (S=A \cup \{k\}) \}$
+        \end{itemize}
+
+        Firstly note that these methods respect Deterministic Sequential specification. 
+        Secondly, note that \textit{add} and \textit{remove} are strongly non-commutative. 
+        For instance, if we perform \textit{add(k)} twice, then only one of them will return true, whichever is executed first. 
+        Similar reasoning for \textit{remove}.
+
     \end{frame}
 
+    \begin{frame}{Proof intuition}
+
+        Proof by contradiction:
+        \begin{itemize}
+            \item Suppose, such a linearizable algorithm does not use RAW or AWAR. 
+            \item Given that the methods are strongly non-commutative, they must perform some form of shared write to actually influence a subsequent call to the method. 
+            \item And also for them to be influenced by previous method calls, they must also perform a shared read. 
+        \end{itemize}
+
+        \begin{itemize}
+            \item Now suppose \textit{add(k)} is performed, but not using AWAR or RAW. 
+            \item This means, we can have an execution where for instance, the method reads from the set, decides it can write but does not do it. 
+            \item Now another \textit{add(k)} does the same thing, but it does its operation fully. Thus writing to the set.
+            \item Now the previous call to \textit{add(k)} can be continued to write another $k$ to the set, which is incorrect. 
+        \end{itemize}
+
+    \end{frame}
+    
     \begin{frame}{Examples of strongly non-commutative methods}
-        %Take two to three key examples
+
+        \begin{itemize}
+            \item \textit{add} and \textit{remove} methods in the above set example.
+            \item \textit{push} and \textit{pop} method for stack / queue data structures.
+            \item \textit{CAS} - Compare and Swap.  
+        \end{itemize}
     \end{frame}
 
     \begin{frame}{Formal proof elements}
@@ -108,6 +143,12 @@
     
     \begin{frame}{Conclusion}
         
+        \begin{itemize}
+            \item Utilization of concurrent computation certainly does not come without its downsides.
+            \item The use of RAW / AWAR cannot be avoided to ensure properties such as Mutual Exclusion and variants of Linearizability.
+        \end{itemize}
+        
+
     \end{frame}
 
     \begin{frame}{Thank you}
