@@ -4,9 +4,12 @@
 
 \usetheme{Warsaw}
 
+\setbeamertemplate{theorems}[numbered]
+
+
 \usepackage{inputenc}
 \usepackage{amsmath}
-\usepackage{theorem}
+\usepackage{amsthm}
 \usepackage{graphicx}
 %\usepackage{geometry}
 \usepackage{tasks}
@@ -27,6 +30,7 @@
 \newcommand{\sw}{\textcolor{BurntOrange}{sw}}
 \newcommand{\jhb}{\textcolor{NavyBlue}{jhb}}
 \newcommand{\jmo}{\textcolor{Red}{jmo}}
+\newcommand{\rmo}{\textcolor{Red}{rmo}}
 \newcommand{\eco}{\textcolor{WildStrawberry}{eco}}
 
 
@@ -113,6 +117,8 @@
         \end{itemize}
 
     \end{frame}
+
+    %----------------------------------------------------------------------------------------------------------------------------------
     
     \begin{frame}{Sequential Consistency (SC)}
         
@@ -160,6 +166,7 @@
 
     \end{frame}
 
+    %----------------------------------------------------------------------------------------------------------------------------
     
     \begin{frame}{x86 Total Store Order (TSO)}
         
@@ -204,6 +211,8 @@
 
     \end{frame}
     
+    %--------------------------------------------------------------------------------------------------------------------------
+
     %Mapping from SC --> x86-TSO
     \begin{frame}{Mapping from SC to TSO}
 
@@ -308,6 +317,8 @@
         Hence, proved.
 
     \end{frame}
+
+    %------------------------------------------------------------------------------------------------------------------------------------------
 
     %Fence optimizations (elimination optimization)
     \begin{frame}{Fence elimination in x86-TSO}
@@ -483,6 +494,51 @@
     If it isn't then, by transitivity, we again have the same composition(final expression) to also be a cycle in $X_{trgt}$. 
     Thus by contradiction, this case also is eliminated.
     }
+
+    %---------------------------------------------------------------------------------------------------------------------------------------
+
+    %Release Acquire Model
+    \begin{frame}{Release Acquire (RA)}
+        
+        Additional definition (replacement to {\mo})
+        \begin{itemize}
+            \item {\rmo} - Disjoint union of {$\mo_{loc}$}.
+        \end{itemize}
+
+        RA is defined by the following irreflexivity relations that must hold for any execution.
+        \begin{tasks}(2)
+            \task {$\mo_{loc}$} is a strict total order.
+            \task {\hb} irreflexive.
+            \task {\rmo;\hb} irreflexive.
+            \task {\fr;\hb} irreflexive.
+            \task {\fr;\rmo} irreflexive.
+        \end{tasks}
+
+    \end{frame}
+
+    \note{
+        The release acquire model is mainly known for its non-multi-copy-atomic behavior.
+        This means, threads can see updates to memory in different orders or timelines. 
+        The typical example to show this is called the IRIW litmus tests (literally means, immeidate read, immediate write).
+        Other than this feature, release acquire also allows reordering of the forms W-R (write-read reordering).
+        As a special transformation, it is observed that many non-multi-copy atomic behaviors can be explained in a multi-copy atomic sense using the Sequentialization optimization, which is sound under RA.
+        Proof for this can be written as a side exercise during PhD.
+    }
+
+    \begin{frame}{Example: IRIW (non-multi-copy atomic behaviors shown by RA)}
+        
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{RA-IRIW.PNG}
+            }
+        \end{figure}
+
+        Note: This behavior is neither allowed under SC nor under TSO as they exhibit only multi-copy atomic behaviors.
+
+    \end{frame}
+
+
+    %----------------------------------------------------------------------------------------------------------------------------------------
 
     %JavaScript Memory model
     \begin{frame}{JavaScript Memory Model}
