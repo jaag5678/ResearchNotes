@@ -289,6 +289,30 @@
     \end{frame}
 
     \begin{frame}{Challenges: Part 4}
+        
+        %Ensuring the transformed model is sound, optimal and complete 
+            %Soudness would guarantee that the allowed transformation is indeed safe in the transformed model - Existing literature has a simple way to prove this by contradiction. 
+            %Optimality would guarantee that the transformed model is not too relaxed that it allows other unsafe transformations - No existing literature.
+            %Completeness would guarantee that the transformed model also allows transformations safe under the base model - No existing literature.
+
+        %Completeness 
+            %Firstly, we assume that we know nothing about the set of transformations valid under the base model.
+            %Secondly, we have the property that if a transformation is safe then the set of illegal executions remain the same after transformations
+            %Illegal executions either do not exist as a graph or they do but trigger certain axiom of hte model 
+            %Our axiomatic model is designed to be a set of irreflexivity constraints.
+            %In this sense, an illegal behavior will render at least one constraint reflexive. (perhaps it would be better to have our model constraints be each representing a disjoint set of graphs)
+
+        %Optimality 
+            %Completeness would require us to check if the set of reflexive patterns that exist in the transformed program are the same as those in the base. 
+            %But this does not help us at all as we are still allowing an unsafe transformation.
+            %Hence in the proof of completeness itself, we identify those patterns whihc are not reflexive in the transformed model. 
+            %These patterns should be those that are explained only due to the unsafe transformation we allow in base model.
+            %This will ensure optimality is also true. 
+
+
+    \end{frame}
+
+    \begin{frame}{Challenges: Part 5}
 
         %Possibly, existing standard models may not be defined in such a way
         %Problem comes as it may be that base model M allows set T and transformed model allows T + T1, but standard model allows only T1. 
@@ -307,6 +331,40 @@
 
     %Related work needs to be listed perhaps?
     \begin{frame}{Misc}
+
+        %There is quite a lot of literature in relaxed memory models, but most of them seem to be too complicated to read and maybe not too useful.
+        %Nevertheless, a list of important papers that does give us good insight in our goal should be read irrespective of its non-trivial aspects. 
+        %List of papers are as follows:
+            %Shared Memory Consistency Models: A Tutorial 
+            %The Problem of Programming Language Concurrency Semantics. 
+            %Herding Cats 
+            %A Better x86 Memory Model: x86 TSO 
+            %Memory Barriers: A hardware view for Software hackers.
+            %Explaining Relaxed Memory Models using Program Transformations. 
+            %Architecture to Architecture mapping of relaxed memory semantics. 
+            %Common Compiler Optimizations in C11 are unsound under Weak Memor Model. 
+            %Formalizing an LLVM fragment of weak memory. 
+            %Validtating C11 optimizations under the LLVM memory model.
+            %Verifying program transofrmaitons under weak memory - Mark Batty paper. 
+            %Modular Relaxed Dependencies for Weak Memory - Mark Batty paper. 
+            %Compiler Testing via a Theory of Sound Optimizations in the C11 memory model.
+            %Sound Optimizations for SC programs - Sevick stuff.
+            %Mixed Size memory models - Peter sewell group.  (optional)
+            %ARM mixed size mmeory model - Jade Alglave and group. (optional)
+            %Nvdia PTX memory model - Olivier Giroux (optional)
+            %Sarita Adve's Thesis
+            %Jade Alglave's thesis. 
+            %Mark Batty's thesis. 
+            %Soham Chakraborty's thesis. 
+            %Jeremy Mansen's thesis. 
+            %Sevcik's thesis. (too complicated for no good reason)
+
+            %Some papers on robustness
+            %Some papers on fairneess (whatever that means)
+            %Some papers on verification of program running under weak memory. - Viktor's group
+            %Some papers on just compiler mappings. 
+        
+
 
     \end{frame}
 
