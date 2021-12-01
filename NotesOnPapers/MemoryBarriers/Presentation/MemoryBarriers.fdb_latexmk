@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1637692520 "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.tex" "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.pdf" "MemoryBarriers" 1637692521
-  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.aux" 1637692348 3390 dd9292c7a3804bb0796edc9df88d5a17 ""
-  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.tex" 1637692346 5144 30792bac51b465f9f1609b2046b7f55e ""
+["pdflatex"] 1638383762 "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.tex" "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.pdf" "MemoryBarriers" 1638383763
+  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.aux" 1638383560 3906 c1c06eedc5ef7b77c9ca2be6957914a7 ""
+  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.tex" 1638383558 8742 bc40414045a190c7fcdf9c6363260ccc ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty" 1480098815 24580 144573175d90c8e36676f97ae1d11ec2 ""
@@ -140,13 +140,14 @@
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1480098842 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1480098843 55589 34128738f682d033422ca125f82e5d62 ""
   "CacheStructure.png" 1637691309 16904 47f0ccd4d38a1867ac472e1c4bb8e067 ""
-  "MemoryBarriers.aux" 1637692348 3390 dd9292c7a3804bb0796edc9df88d5a17 ""
-  "MemoryBarriers.nav" 1637692348 1954 f40248f82db030a52fb29a923967f744 ""
-  "MemoryBarriers.out" 1637692348 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "MemoryBarriers.tex" 1637692346 5144 30792bac51b465f9f1609b2046b7f55e ""
+  "MESI_Example.png" 1638380933 94708 68e961a343845aba37d8ab81674a7295 ""
+  "MemoryBarriers.aux" 1638383560 3906 c1c06eedc5ef7b77c9ca2be6957914a7 ""
+  "MemoryBarriers.nav" 1638383560 2326 35091042cfd2c764b7064f3946fb8d8c ""
+  "MemoryBarriers.out" 1638383559 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "MemoryBarriers.tex" 1638383558 8742 bc40414045a190c7fcdf9c6363260ccc ""
   (generated)
-  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.log"
-  "MemoryBarriers.out"
+  "MemoryBarriers.aux"
   "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.pdf"
   "MemoryBarriers.nav"
-  "MemoryBarriers.aux"
+  "/home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.log"
+  "MemoryBarriers.out"

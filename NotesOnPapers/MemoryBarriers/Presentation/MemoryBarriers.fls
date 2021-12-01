@@ -285,6 +285,9 @@ INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation
 INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/CacheStructure.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
+INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MESI_Example.png
+INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MESI_Example.png
+INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MESI_Example.png
 OUTPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.nav
 OUTPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.toc
 OUTPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/MemoryBarriers/Presentation/MemoryBarriers.snm

@@ -33,7 +33,7 @@
         
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics[scale=0.6]{CacheStructure.png}
+                \includegraphics[scale=0.3]{CacheStructure.png}
             }
         \end{figure}
 
@@ -88,9 +88,74 @@
         Invalid state can contain any stale data that is never going to be read by the CPU (as it is stale).
     }
 
-    \begin{frame}{Example of Cache Communication methods}
+    \begin{frame}{MESI Protocol Messages}
+
+        The following messages are passed by a cache line to other caches in the system. 
+        \begin{itemize}
+            \item Read - Contains the physical address of the cache line to be read. 
+            \item Read Response - Contains the data requested by a previous Read message.
+            \item Invalidate - Contains the physical address of the cache line to be invalidated. 
+            \item Invalidate Acknowledge - CPU receiving an Invalidate message must respond with this message once the specfied cache line is invalidated.
+            \item Read Invalidate - Does the action of both Read and Invalidate in one message. 
+            \item Writeback - Contains both the address and the data tobe written back to memory (could also implicitly update other cache lines with this).
+        \end{itemize}
         
     \end{frame}
+
+    \begin{frame}{Example of Cache Communication}
+
+        The following table represents a sequence of actions done by CPU and the different states (MESI) of the caches after the action has been done. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.2]{MESI_Example.png}
+            }
+        \end{figure}
+        
+    \end{frame}
+
+    \begin{frame}{Sequence 0 to 2}
+
+        The 0th sequence represents the default state of cache before being used. 
+        Each cache line is set to "Invalid" state. 
+
+        The 1st sequence represents a load done by CPU 0 to fetch data from address 0. 
+        The content in stored in CPU0 cache and the state changes to "Shared".
+
+        The 2nd sequences represents a load done by CPU 0 to fethc data from address 0.
+        The content is stored in CPU1 cache and the state changes to "Shared".
+        
+    \end{frame}
+
+    \begin{frame}{Sequence 3 to 5}
+
+        The 3rd sequence represents a load done by CPU 0 to fetch data from address 8.
+        This implicity means to Invalidate one's own cache line by sending an invalidate message to it. 
+        This gives space to store data from address 0, which now is in the "Shared" state.
+
+        The 4th sequence represents an RMW done by CPU 2 on address 0.
+        Before it can do this, it needs to invalidate other caches having data on this address by sending "Invalidate" message.
+        Once that is done, it's own cache (CPU 2) is set to "Exclusive" state, while others which had data at address 0 to "Invalid".
+        
+        The 5th sequence represents the actual store done by CPU 2 (as part of RMW).
+        This changes its own cache to state "Modified" and sets the memory of address 0 to "Invalid".
+    \end{frame}
+
+    \begin{frame}{Sequence 6 and 7}
+
+        The 6th sequence represents CPU 1 performing an atomic write to data at Address 0.
+        Since CPU 2 has its cache in modified state, the increment needs to change that value, while also invalidating their cache. 
+        So a "Read Invalidate" message is sent to each cache line, get the updated store value and increment it by 1.
+        Now it sets its own cache line (CPU 1) to modified state. 
+        While other caches having data at address 0 is set ot invalidate. 
+
+        The 7th sequence represents the actual commiting of the new data to memory. 
+        This can either be done by actually issuing a writeback or forcing the cache to make space for other address data (via a Load).
+        Here, a Load is issued for address 0 by CPU 1, which forces a writeback to address 0.
+        The value at memory address 0 is updated and the state becomes "Valid".
+        Meanwhile the cache line of CPU 1 has a "Shared" state.
+        
+    \end{frame}
+
 
     \begin{frame}{Example}
         
