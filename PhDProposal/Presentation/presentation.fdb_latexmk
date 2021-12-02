@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1637694182 "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.tex" "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.pdf" "presentation" 1637694183
-  "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.aux" 1637694010 5338 5c012d3e2b14668b4de1dc9ef8a2848c ""
-  "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.tex" 1637694009 18984 9e465b6b0c8b4fd5efaa3978faa45cba ""
+["pdflatex"] 1638468725 "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.tex" "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.pdf" "presentation" 1638468879
+  "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.aux" 1638468520 5338 5c012d3e2b14668b4de1dc9ef8a2848c ""
+  "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.tex" 1638468672 19412 4274284406d6a8d6045979b144c4a9e9 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty" 1480098815 24580 144573175d90c8e36676f97ae1d11ec2 ""
@@ -140,13 +140,13 @@
   "/usr/share/texlive/texmf-dist/tex/latex/translator/translator.sty" 1515274380 8690 269ca424c32d015df5d558ef9752619d ""
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1480098842 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1480098843 55589 34128738f682d033422ca125f82e5d62 ""
-  "presentation.aux" 1637694010 5338 5c012d3e2b14668b4de1dc9ef8a2848c ""
-  "presentation.nav" 1637694010 3341 7d73de7ff642878dd6c36c12ea38837e ""
-  "presentation.out" 1637694010 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "presentation.tex" 1637694009 18984 9e465b6b0c8b4fd5efaa3978faa45cba ""
+  "presentation.aux" 1638468520 5338 5c012d3e2b14668b4de1dc9ef8a2848c ""
+  "presentation.nav" 1638468520 3341 7d73de7ff642878dd6c36c12ea38837e ""
+  "presentation.out" 1638468519 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "presentation.tex" 1638468672 19412 4274284406d6a8d6045979b144c4a9e9 ""
   (generated)
-  "presentation.out"
   "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.log"
   "/home/sable/aaksha/ResearchNotes/PhDProposal/Presentation/presentation.pdf"
   "presentation.aux"
+  "presentation.out"
   "presentation.nav"
