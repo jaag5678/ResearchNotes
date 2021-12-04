@@ -158,24 +158,125 @@
 
 
     \begin{frame}{Example}
-        
+
+        Consider the example where CPU 0 wants to write to memory whose data is on cache line of CPU 1. 
+        This would require the following actions
+        \begin{itemize}
+            \item CPU 0 sends an Invalidate message to CPU 1.
+            \item CPU 1 receives the message, sets the appropriate cache line to "Invalid" state.
+            \item CPU 1 sends the Acknowledgement message along with the data on the cache line to CPU 0.
+            \item CPU 0 receives the Acknowledgement and data.
+            \item CPU 0 does the write to memory and updates its own cache. 
+        \end{itemize}
+
     \end{frame}
 
-    \begin{frame}{Need for Write Buffers}
+    \begin{frame}{Unnecessary stalls due to Writes}
+
+        Notice that in the example above, CPU 0 needs to stall itself until the Acknowledgement message is received from CPU 1.
+        This is showcased in the figure below.
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{Write_Stall.PNG}
+            }
+        \end{figure}
+
+        CPU 0 need not stall as it will eventually do the write that it is supposed to do. 
+        Rather it can continue doing some other task.
+
+    \end{frame}
+
+    \begin{frame}{Solution to write stalling: Write Buffers}
         
+        One solution to this is to have a store buffer for each CPU.
+        Writes to be done will be stored in this buffer and the CPU can continue doing future tasks.
+        When the Acknowledgement messages are received by other CPUs, the write can be committed to its cache line (and eventually to memory).
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{WriteBuffers.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
     \begin{frame}{Added Complications}
         
+        Adopting the above system does create its own problems. 
+        \begin{itemize}
+            \item The main cause is that writes to memory committed to store buffers are not read by the same CPU from it.
+            \item Instead, the same memory is read either from cache or main memory.
+            \item This means, the CPU uses a stale value of memory which results in incorrect execution of programs. 
+        \end{itemize}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{WriteBufferProblem.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
-    \begin{frame}{Example}
-
+    \note{Here is the reason why the example above fails. Consider only CPU 0 and 1 exist.
+        \begin{itemize}
+            \item CPU 0 wants to do the write $a=1$. So it sends a Read Invalidate message to CPU 1 and commits the store to its Store buffer. 
+            \item CPU 1 receives the message and sends the invalidate with the current value of $a$ from its cache. 
+            \item CPU 0 meanwhile wants to do $b = a + $, so starts reading $a$ from its own cache line. It receives the value 0. 
+            \item Now CPU 0 receives the message from CPU 1 and the store buffer flushes the write to CPU 0 cache line. 
+            \item CPU 0 does $b = a + 1$ having read $a=0$ from its cache before.
+            \item Now $b=1$.
+            \item The assertion fails.
+        \end{itemize}
+    }
+    
+    \begin{frame}{Solution seems simple: but?}
+        
+        The straightforward solution to this is to first let CPUs check their own store buffers during loads from memory and then if not found checking cache and/or memory. 
+        However, this also does not prevent all our problems. 
+        Consider the code below, where CPU 0 holds exclusive rights to cache line for $b$. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{WriteBufferProblem2.PNG}
+            }
+        \end{figure}
+        The problem is that CPU 0 (if running the first code snippet) can upadte value of $b$ before committing the value of $a$ to cache.
+        This may result in the assertion to fail.
     \end{frame}
 
+    \note{
+        The reason why this would happen is the following steps
+        \begin{itemize}
+            \item CPU 0 wants to do $a=1$, but $a$'s cache line is not exclusive/modified, so it sends the write to store buffer and sends Read Invalidate to CPU 1. 
+            \item CPU 1 wants to do $while(b==0)$ so tries to read value of $b$. It does not exist in its cache line, so sends a read to CPU 0.  
+            \item CPU 0 now wants to do $b=1$ and since it owns this cache line, commits the write immedidately to cache. 
+            \item CPU 0 receives the read message from CPU 1 and sends $b=1$ as a response to CPU 1. 
+            \item CPU 1 receives the read invalidate for $a$ and sends Acknowledgement along with the value of $a$ to CPU 0. 
+            \item CPU 1 then receives the value of $b$. Ends the loop (as $b=1$) and moves to assertion.
+            \item The assertion fails. 
+            \item CPU 0 receives the Acknowledgement from CPU 1 on $a$. So now it commits from store buffer to cache line.
+        \end{itemize}
+    }
+    
     \begin{frame}{Here comes Write Memory Barriers}
+
+        The problem now is that the hardware does not recognize dependencies between memory accesses (meaning things like conditionals and assertions like the above example).
+        At this point, the hardware itself cannot do much.
+        
+        The solution to this was to have an instruction which specifically tells the hardware that some dependency exists.
+        This instruction is called a Write Memory Barrier. 
+        The following code with a write barrier solves our issue. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{WriteBarrierSol.PNG}
+            }
+        \end{figure}
         
     \end{frame}
+
+    \note{
+        The reason inserting a write memory barrier there solves our problem is that CPU 0 will never do the wrtie $b=1$ until the store buffer holding $a=1$ is first committed to cache. 
+    }
 
     \begin{frame}{Need for Invalidate Queues}
         
