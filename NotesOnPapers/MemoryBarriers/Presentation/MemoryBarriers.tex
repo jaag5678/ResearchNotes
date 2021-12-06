@@ -33,7 +33,7 @@
         
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics[scale=0.3]{CacheStructure.png}
+                \includegraphics[scale=0.18]{CacheStructure.png}
             }
         \end{figure}
 
@@ -115,49 +115,51 @@
 
     \begin{frame}{Sequence 0 to 2}
 
-        The 0th sequence represents the default state of cache before being used. 
-        Each cache line is set to "Invalid" state. 
-
-        The 1st sequence represents a load done by CPU 0 to fetch data from address 0. 
-        The content in stored in CPU0 cache and the state changes to "Shared".
-
-        The 2nd sequences represents a load done by CPU 0 to fethc data from address 0.
-        The content is stored in CPU1 cache and the state changes to "Shared".
+        \begin{itemize}
+            \item The 0th sequence represents the default state of cache before being used. 
+                Each cache line is set to "Invalid" state. 
+            \item The 1st sequence represents a load done by CPU 0 to fetch data from address 0. 
+                The content in stored in CPU0 cache and the state changes to "Shared".
+            \item The 2nd sequences represents a load done by CPU 0 to fethc data from address 0.
+                The content is stored in CPU1 cache and the state changes to "Shared".
+        \end{itemize}
         
     \end{frame}
 
     \begin{frame}{Sequence 3 to 5}
 
-        The 3rd sequence represents a load done by CPU 0 to fetch data from address 8.
-        This implicity means to Invalidate one's own cache line by sending an invalidate message to it. 
-        This gives space to store data from address 0, which now is in the "Shared" state.
-
-        The 4th sequence represents an RMW done by CPU 2 on address 0.
-        Before it can do this, it needs to invalidate other caches having data on this address by sending "Invalidate" message.
-        Once that is done, it's own cache (CPU 2) is set to "Exclusive" state, while others which had data at address 0 to "Invalid".
+        \begin{itemize}
+            \item The 3rd sequence represents a load done by CPU 0 to fetch data from address 8.
+                This implicity means to Invalidate one's own cache line by sending an invalidate message to it. 
+                This gives space to store data from address 0, which now is in the "Shared" state.
+            \item The 4th sequence represents an RMW done by CPU 2 on address 0.
+                Before it can do this, it needs to invalidate other caches having data on this address by sending "Invalidate" message.
+                Once that is done, it's own cache (CPU 2) is set to "Exclusive" state, while others which had data at address 0 to "Invalid".
+            \item The 5th sequence represents the actual store done by CPU 2 (as part of RMW).
+                This changes its own cache to state "Modified" and sets the memory of address 0 to "Invalid".
+        \end{itemize}
         
-        The 5th sequence represents the actual store done by CPU 2 (as part of RMW).
-        This changes its own cache to state "Modified" and sets the memory of address 0 to "Invalid".
     \end{frame}
 
     \begin{frame}{Sequence 6 and 7}
 
-        The 6th sequence represents CPU 1 performing an atomic write to data at Address 0.
-        Since CPU 2 has its cache in modified state, the increment needs to change that value, while also invalidating their cache. 
-        So a "Read Invalidate" message is sent to each cache line, get the updated store value and increment it by 1.
-        Now it sets its own cache line (CPU 1) to modified state. 
-        While other caches having data at address 0 is set ot invalidate. 
-
-        The 7th sequence represents the actual commiting of the new data to memory. 
-        This can either be done by actually issuing a writeback or forcing the cache to make space for other address data (via a Load).
-        Here, a Load is issued for address 0 by CPU 1, which forces a writeback to address 0.
-        The value at memory address 0 is updated and the state becomes "Valid".
-        Meanwhile the cache line of CPU 1 has a "Shared" state.
+        \begin{itemize}
+            \item The 6th sequence represents CPU 1 performing an atomic write to data at Address 0.
+                Since CPU 2 has its cache in modified state, the increment needs to change that value, while also invalidating their cache. 
+                So a "Read Invalidate" message is sent to each cache line, get the updated store value and increment it by 1.
+                Now it sets its own cache line (CPU 1) to modified state. 
+                While other caches having data at address 0 is set ot invalidate. 
+            \item The 7th sequence represents the actual commiting of the new data to memory. 
+                This can either be done by actually issuing a writeback or forcing the cache to make space for other address data (via a Load).
+                Here, a Load is issued for address 0 by CPU 1, which forces a writeback to address 0.
+                The value at memory address 0 is updated and the state becomes "Valid".
+                Meanwhile the cache line of CPU 1 has a "Shared" state.
+        \end{itemize}
         
     \end{frame}
 
 
-    \begin{frame}{Example}
+    \begin{frame}{Another example}
 
         Consider the example where CPU 0 wants to write to memory whose data is on cache line of CPU 1. 
         This would require the following actions
@@ -212,7 +214,7 @@
 
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics[scale=0.6]{WriteBufferProblem.PNG}
+                \includegraphics[scale=0.8]{WriteBufferProblem.PNG}
             }
         \end{figure}
 
@@ -237,7 +239,7 @@
         Consider the code below, where CPU 0 holds exclusive rights to cache line for $b$. 
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics[scale=0.6]{WriteBufferProblem2.PNG}
+                \includegraphics[scale=0.8]{WriteBufferProblem2.PNG}
             }
         \end{figure}
         The problem is that CPU 0 (if running the first code snippet) can upadte value of $b$ before committing the value of $a$ to cache.
@@ -251,12 +253,20 @@
             \item CPU 1 wants to do $while(b==0)$ so tries to read value of $b$. It does not exist in its cache line, so sends a read to CPU 0.  
             \item CPU 0 now wants to do $b=1$ and since it owns this cache line, commits the write immedidately to cache. 
             \item CPU 0 receives the read message from CPU 1 and sends $b=1$ as a response to CPU 1. 
+            \end{itemize}
+    }
+
+    \note{
+
+        \begin{itemize}
             \item CPU 1 receives the read invalidate for $a$ and sends Acknowledgement along with the value of $a$ to CPU 0. 
             \item CPU 1 then receives the value of $b$. Ends the loop (as $b=1$) and moves to assertion.
             \item The assertion fails. 
             \item CPU 0 receives the Acknowledgement from CPU 1 on $a$. So now it commits from store buffer to cache line.
         \end{itemize}
+
     }
+
     
     \begin{frame}{Here comes Write Memory Barriers}
 
@@ -268,7 +278,7 @@
         The following code with a write barrier solves our issue. 
         \begin{figure}
             \makebox[\textwidth][c]{
-                \includegraphics[scale=0.6]{WriteBarrierSol.PNG}
+                \includegraphics[scale=0.8]{WriteBarrierSol.PNG}
             }
         \end{figure}
         
@@ -278,36 +288,118 @@
         The reason inserting a write memory barrier there solves our problem is that CPU 0 will never do the wrtie $b=1$ until the store buffer holding $a=1$ is first committed to cache. 
     }
 
-    \begin{frame}{Need for Invalidate Queues}
+    \begin{frame}{Yay store buffers ! But ? }
         
+        Store buffers are good for performance. 
+        But in hardware, these buffers are quite small. 
+        So if they get full or the CPU needs to process a write barrier instruction, it must wait until all the writes are flushed.
+        This in turn depends on whether the CPU has received invalidate acknowledgement from all the CPUs in the hardware. 
+        This may take time as other CPUs may be busy accessing main memory or other cache lines at the moment, which take a long time. 
+        In addition, to send acknowledgement, the CPU must first access its cache and tag the appropriate cache line Invalid. 
+        All this takes longer and this stalling becomes a bottleneck for performance. 
+
+    \end{frame}
+
+    \begin{frame}{Invalidate queues}
+        
+        One observation is that the CPU need not actually invalidate the cache line immediately before sending acknowledgement.
+        The CPU only needs to do this if another message for the same cache line is requested. 
+
+        For this, each CPU is equipped with its own invalidate queue. 
+        Invalidate requests are stored in this queue, promising the CPU requesting the acknowledgement that it would be done eventually. 
+        So the acknowledgement message is often sent immediately without modifying the cache line state. 
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{InvalidateQueues.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
     \begin{frame}{Added Complications}
         
+        While doing the above is good, the CPUs still are not concerned with the state of the cache if they themselves receive a read/write access to be performed.
+        In essence, on a read, the CPU might end up reading a stale value from cache line (with the invalidate message for that line still in queue).
+
+        The following example, run with store buffers and invalidate queues even with a write barrier will produce an incorrect result. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.8]{InvalidateQueueProblem.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
-    \begin{frame}{Example}
-        
-    \end{frame}
+    \note{
+        The reason why the above example may lead to assertion failure is as follows. 
+        Suppose CPU0 runs foo and CPU1 bar.
+        Also suppose $a$ is in shared state in cache while CPU0 has exclusive rights to cache line of $b$. 
+        \begin{itemize}
+            \item CPU0 performs $a=1$. But the cache line is "Shared". So it sends an invalidate message to CPU1.
+            \item CPU1 receives the message, immedidately sends acknowledgement. But CPU1 does not yet change the cache line of $a$ to "Invalid".
+            \item CPU1 processes $while(b==0)$, by issuing a read request to CPU0 cache.
+            \item CPU0 receives the acknowledgement. Now it updates its cache with the modified value of $a$. 
+        \end{itemize}
+    }
+
+    \note{
+        \begin{itemize}
+            \item CPU0 processes the write barrier and proceeds to do $b=1$. Since it has exclusive right to it, updates the cache line of $b$ right away.
+            \item Now CPU0 receives the read request for $b$ and sends the value $1$.
+            \item CPU1 receives this value and ends the loop. 
+            \item Now for the assertion, CPU1 reads the value of $a$ from its own cache (without processing hte invalidate message for it as it thinks nobody else it bothering it with another cache message for that line).
+            \item Hence the assertion fails.
+        \end{itemize}
+    }
 
     \begin{frame}{Here comes Read Memory Barriers}
+     
+        The above example indicates that the memory barrier is sort of ignored. 
+        One solution for this example is to ensure that when the CPU comes across a memory barrier, it ensures that its invalidate queue is serviced (emptied) before proceeding. 
+        In literature one can say this as a read barrier. 
+        So the solution to the above problem is a barrier that will be inserted in bar too.
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.8]{ReadBarrierSolution.PNG}
+            }
+        \end{figure}
         
     \end{frame}
 
-    \begin{frame}{Barrier instructions offered by Linux}
-        
-    \end{frame}
+    \note{
+        Currently, this is only viewed as a memory barrier instruction. 
+        In many languages/hardwares, different variants of these barriers are provided. 
+        Of these, we have looked at Read and Write barriers. 
+        However, we can further dissect it based on what accesses should not occur before those accesses which precede the barrier. 
+        Doing so, we get Read-Read(Read memory barrier), Read-Write, Write-Read and Write-Write(write memory barrier) variants of barriers.
+    }
 
-    \begin{frame}{Hardware Example: Alfa}
-        
-    \end{frame}
+    \begin{frame}{Barrier instructions and their effect on ordering}
 
-    \begin{frame}{Hardware Example: x86}
+        While memory barriers are useful for ordering accesses, one has to note that they only order accesses for the CPU that performs these accesses. 
+        This means, CPUs might observe incoming writes from other CPUs in different orders.
+        This in literature is known as non-multicopy-atomicity. 
     
     \end{frame}
 
     \begin{frame}{Conclusion}
+    
+        \begin{itemize}
+            \item Caches and buffers definitely help in performance improvements.
+            \item However, this comes at a cost of non-trivial program behaviors.
+            \item These behaviors can be controlled using barriers, but only upto some point. 
+            \item The age-old tradeoff between performance and complexity in semantics to explain program execution can be seen firsthand here. 
+            \item Perhaps we should not crave for so much performance?
+            \item Perhaps just improve the cache coherence protocol system?  
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}{Thank you!}
         
+        Questions? 
+
     \end{frame}
 
 \end{document}

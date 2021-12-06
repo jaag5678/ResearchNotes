@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  4 DEC 2021 15:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.8.29)  6 DEC 2021 17:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -655,7 +655,7 @@ Package: amsthm 2017/10/31 v2.20.4
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 11.
 
-No file MemoryBarriers.aux.
+(./MemoryBarriers.aux)
 \openout1 = `MemoryBarriers.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -672,6 +672,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -751,6 +752,8 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 13.
 LaTeX Info: Redefining \pageref on input line 13.
 LaTeX Info: Redefining \nameref on input line 13.
+
+(./MemoryBarriers.out) (./MemoryBarriers.out)
 \@outlinefile=\write5
 \openout5 = `MemoryBarriers.out'.
 
@@ -820,23 +823,17 @@ Dictionary: translator-numbers-dictionary, Language: English
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictiona
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-)
-No file MemoryBarriers.nav.
-[1
+) (./MemoryBarriers.nav) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ]
-<CacheStructure.png, id=82, 900.36375pt x 651.43375pt>
+<CacheStructure.png, id=84, 900.36375pt x 651.43375pt>
 File: CacheStructure.png Graphic file (type png)
 <use CacheStructure.png>
 Package pdftex.def Info: CacheStructure.png  used on input line 46.
-(pdftex.def)             Requested size: 270.1112pt x 195.43163pt.
-
-Overfull \vbox (76.21843pt too high) detected at line 46
- []
-
-[3
+(pdftex.def)             Requested size: 162.05847pt x 117.253pt.
+ [3
 
  <./CacheStructure.png>] [4
 
@@ -849,15 +846,14 @@ Overfull \vbox (76.21843pt too high) detected at line 46
 ] [8
 
 ]
-<MESI_Example.png, id=204, 1342.01375pt x 529.98pt>
+<MESI_Example.png, id=206, 1342.01375pt x 529.98pt>
 File: MESI_Example.png Graphic file (type png)
 <use MESI_Example.png>
 Package pdftex.def Info: MESI_Example.png  used on input line 114.
 (pdftex.def)             Requested size: 268.398pt x 105.99411pt.
  [9
 
- <./MESI_Example.png>]
-[10
+ <./MESI_Example.png>] [10
 
 ] [11
 
@@ -866,89 +862,113 @@ Package pdftex.def Info: MESI_Example.png  used on input line 114.
 ] [13
 
 ]
-<Write_Stall.PNG, id=338, 206.57175pt x 224.63925pt>
+<Write_Stall.PNG, id=340, 206.57175pt x 224.63925pt>
 File: Write_Stall.PNG Graphic file (type png)
 <use Write_Stall.PNG>
-Package pdftex.def Info: Write_Stall.PNG  used on input line 188.
+Package pdftex.def Info: Write_Stall.PNG  used on input line 190.
 (pdftex.def)             Requested size: 123.94398pt x 134.78458pt.
  [14
 
  <./Write_Stall.PNG>]
-<WriteBuffers.PNG, id=367, 244.5135pt x 242.70676pt>
+<WriteBuffers.PNG, id=369, 244.5135pt x 242.70676pt>
 File: WriteBuffers.PNG Graphic file (type png)
 <use WriteBuffers.PNG>
-Package pdftex.def Info: WriteBuffers.PNG  used on input line 202.
+Package pdftex.def Info: WriteBuffers.PNG  used on input line 204.
 (pdftex.def)             Requested size: 146.70923pt x 145.62517pt.
  [15
 
  <./WriteBuffers.PNG>]
-<WriteBufferProblem.PNG, id=395, 113.223pt x 39.7485pt>
+<WriteBufferProblem.PNG, id=397, 113.223pt x 39.7485pt>
 File: WriteBufferProblem.PNG Graphic file (type png)
 <use WriteBufferProblem.PNG>
-Package pdftex.def Info: WriteBufferProblem.PNG  used on input line 219.
-(pdftex.def)             Requested size: 67.93431pt x 23.84927pt.
+Package pdftex.def Info: WriteBufferProblem.PNG  used on input line 221.
+(pdftex.def)             Requested size: 90.5785pt x 31.79883pt.
  [16
 
  <./WriteBufferProblem.PNG>]
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 231
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 233
 .
-LaTeX Font Info:    No file OMScmss.fd. on input line 231.
+LaTeX Font Info:    No file OMScmss.fd. on input line 233.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 231.
+(Font)              for symbol `textbullet' on input line 233.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 231.
+LaTeX Font Info:    Try loading font information for U+msa on input line 233.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 231.
+LaTeX Font Info:    Try loading font information for U+msb on input line 233.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [17
 
 ]
-<WriteBufferProblem2.PNG, id=431, 143.93774pt x 131.2905pt>
+<WriteBufferProblem2.PNG, id=432, 143.93774pt x 131.2905pt>
 File: WriteBufferProblem2.PNG Graphic file (type png)
 <use WriteBufferProblem2.PNG>
-Package pdftex.def Info: WriteBufferProblem2.PNG  used on input line 245.
-(pdftex.def)             Requested size: 86.3633pt x 78.77489pt.
+Package pdftex.def Info: WriteBufferProblem2.PNG  used on input line 247.
+(pdftex.def)             Requested size: 115.15033pt x 105.03252pt.
  [18
 
- <./WriteBufferProblem2.PNG>]
-Overfull \vbox (33.64003pt too high) detected at line 259
- []
+ <./WriteBufferProblem2.PNG>] [19
 
-[19
+] [20
 
 ]
-<WriteBarrierSol.PNG, id=467, 100.57574pt x 75.8835pt>
+<WriteBarrierSol.PNG, id=474, 100.57574pt x 75.8835pt>
 File: WriteBarrierSol.PNG Graphic file (type png)
 <use WriteBarrierSol.PNG>
-Package pdftex.def Info: WriteBarrierSol.PNG  used on input line 275.
-(pdftex.def)             Requested size: 60.3459pt x 45.53044pt.
- [20
+Package pdftex.def Info: WriteBarrierSol.PNG  used on input line 285.
+(pdftex.def)             Requested size: 80.4607pt x 60.70686pt.
+ [21
 
- <./WriteBarrierSol.PNG>] [21
-
-] [22
+ <./WriteBarrierSol.PNG>] [22
 
 ] [23
 
-] [24
+]
+<InvalidateQueues.PNG, id=535, 237.2865pt x 263.7855pt>
+File: InvalidateQueues.PNG Graphic file (type png)
+<use InvalidateQueues.PNG>
+Package pdftex.def Info: InvalidateQueues.PNG  used on input line 318.
+(pdftex.def)             Requested size: 142.37299pt x 158.2725pt.
 
-] [25
+Overfull \vbox (61.25932pt too high) detected at line 318
+ []
 
-] [26
+[24
+
+ <./InvalidateQueues.PNG>]
+<InvalidateQueueProblem.PNG, id=563, 149.96025pt x 142.73325pt>
+File: InvalidateQueueProblem.PNG Graphic file (type png)
+<use InvalidateQueueProblem.PNG>
+Package pdftex.def Info: InvalidateQueueProblem.PNG  used on input line 332.
+(pdftex.def)             Requested size: 119.96834pt x 114.18674pt.
+ [25
+
+ <./InvalidateQueueProblem.PNG>] [26
 
 ] [27
 
-] [28
-
 ]
-[29
+<ReadBarrierSolution.PNG, id=604, 160.80075pt x 74.07675pt>
+File: ReadBarrierSolution.PNG Graphic file (type png)
+<use ReadBarrierSolution.PNG>
+Package pdftex.def Info: ReadBarrierSolution.PNG  used on input line 368.
+(pdftex.def)             Requested size: 128.64075pt x 59.26147pt.
+
+[28
+
+ <./ReadBarrierSolution.PNG>] [29
+
+] [30
+
+] [31
+
+] [32
 
 ]
 \tf@nav=\write6
@@ -960,29 +980,23 @@ Package pdftex.def Info: WriteBarrierSol.PNG  used on input line 275.
 \tf@snm=\write8
 \openout8 = `MemoryBarriers.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 313.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 313.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 405.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 405.
  (./MemoryBarriers.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 313.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 313.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 405.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 405.
+Package rerunfilecheck Info: File `MemoryBarriers.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
-
-Package rerunfilecheck Warning: File `MemoryBarriers.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `MemoryBarriers.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 17082 strings out of 494923
- 325926 string characters out of 6180742
- 393679 words of memory out of 5000000
- 19954 multiletter control sequences out of 15000+600000
+ 17162 strings out of 494923
+ 326936 string characters out of 6180742
+ 393768 words of memory out of 5000000
+ 20017 multiletter control sequences out of 15000+600000
  14226 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  48i,15n,57p,781b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -992,10 +1006,10 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on MemoryBarriers.pdf (29 pages, 241440 bytes).
+Output written on MemoryBarriers.pdf (32 pages, 280675 bytes).
 PDF statistics:
- 747 PDF objects out of 1000 (max. 8388607)
- 676 compressed objects within 7 object streams
- 59 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 753 PDF objects out of 1000 (max. 8388607)
+ 673 compressed objects within 7 object streams
+ 65 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 
