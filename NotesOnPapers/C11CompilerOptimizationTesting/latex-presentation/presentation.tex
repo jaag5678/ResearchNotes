@@ -31,24 +31,135 @@
     \end{frame}
 
     \begin{frame}{Example of Compiler optimisation}
+
+        Consider the following example C code, where $th\_1$ and $th\_2$ are run by two different threads.
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{EXAMPLE_COMPOPT_SRC.PNG}
+            }
+        \end{figure}
+
+        The above code should print the value lf $g2$ to be $42$. 
+
+        However, the above code when compiled using gcc 4.7.0 with -O2 enabled on x86-64 machine, the result of printf is $0$.  
         
     \end{frame}
 
-    \begin{frame}{Main idea of testing using traces: Another Example}
+    \note{
+        The reason why it should be $42$ is that the value of $g2$ is never changed in $th\_1$.
+        Notice that $g1$ has $1$, so the conditional will always return $NULL$.
+        It is only $th\_2$ that writes to $g2$.
+    }
+
+    \begin{frame}{Behind the scenes}
+
+        The above code is optimized using Loop invariant code motion in $th\_1$.
+        However, the code that results due to it in x86-64 format is as below:
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{EXAMPLE_COMPOPT_TRGT.PNG}
+            }
+        \end{figure}
+
+        Notice the last $movl$ before return. 
+        Here the value of $g2$ is restored to be $0$.
+        This is sound if the program was sequential, however, in a concurrent setting this is clearly unsafe.
         
     \end{frame}
+
+    \note{
+        Here, the optimization tries to eliminate the inner loop.
+        However, the process introduces some redundant writes, like that of $g2$ to be present.
+        Thus, redundant write Introduction in this case becomes unsafe.
+        This in turn makes such a variant of loop invariant code motion unsafe.  
+    }
+
+    \begin{frame}{Main idea of testing using traces: Another Example}
+        Testing for such concurrency bugs is difficult. 
+        For this purpose, we note that the concurrency bugs are only among those actions which involve a shared memory.
+        So reducing the source program to a set of actions performed on shared memory can first be done. 
+        This is followed by identifying the possible traces of these actions allowed by the program on its executions.
+        The above code's problem can be observed by the following trace observed to be incorrect after optimization.
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{EXAMPLE_COMPOPT_TRACE.PNG}
+            }
+        \end{figure} 
+
+    \end{frame}
+
+    \note{
+        The memory model of C11 by this time was defined using traces / execution based semantics.
+        It was more of utilizing this to do practical testing of C programs.
+    }
 
     \begin{frame}{Overview of C11 memory model}
         
+        To summarize the memory model, each shared memory access has a memory order. 
+        Each action has an access, memory order and thread id. 
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics{C11MemoryModel.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
-    \begin{frame}{Useful terminology used}
+    \begin{frame}{Useful terminology used for optimization}
+
+        \begin{itemize}
+            \item Every concurrent program has various executions possible. 
+            \item These executions involve various shared memory $actions$ that are done (even those due to multiple iterations of loop).
+            \item A collection of these actions is defined to be an $opsem$. 
+            \item $opsem$ also retains the syntactic order between actions belonging to same thread.
+            \item All possible $opsems$ for a program is called $opsemset$. 
+        \end{itemize}
+
+        An example is as below;
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{OPSEM_EXAMPLE.PNG}
+            }
+        \end{figure}
+
+    \end{frame}
+
+    \begin{frame}{Effect of an optimization}
         
+        \begin{itemize}
+            \item The effect of an optimization is directly seen at the $opsem$ level. 
+            \item For an $opsem$, an optimization has the effect of reordering, eliminating and introducing actions. 
+        \end{itemize}
+
+        The following example showcases this:
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.6]{OPSEM_EXAMPLE_LOOP_INV_CODE_MOTION.PNG}
+            }
+        \end{figure}
+
     \end{frame}
 
     \begin{frame}{Soundness of Optimisations}
         
-        %intuition and general theorem
+        \begin{itemize}
+            \item Every $opsem$ represents an execution.
+            \item The outcome of the execution can be characterized as the final values in memory and the final read values.
+            \item These two are represented together as an $obs$ or observable behavior. 
+            \item A pair $opsem, obs$ represent a candidate execution.
+            \item An optimization is sound if the set of $obs$ of the transformed program is a subset of that of the source program . 
+        \end{itemize}
+        
+    \end{frame}
+
+    \begin{frame}{Types of Optimizations considered}
+
+        \begin{itemize}
+            \item Elimination - eg: Read-after-Write, Write-after-Write, etc.
+            \item Reordering - eg: Read-Write, Read-Read, etc.
+            \item Introduction - Read / Write. 
+        \end{itemize}
+        
     \end{frame}
 
     \begin{frame}{Using above results for testing}
