@@ -1,0 +1,20 @@
+A list of papers for the comprehensive exam: 
+
+0) How to make a Multiprocess Computer that correctly executes a Multiprocess Program.
+1) Shared Memory Consistency Models: A Tutorial 
+2) Memory Barriers: A Hardware view for Software Hackers
+3) A better x86 Memory Model: x86-TSO
+4) Understanding POWER Multiprocessors 
+5) The Problem of Programming Language Concurrency Semantics
+6) Fixing the Java Memory Model 
+7) The Java Memory Model - (fixed)
+8) Validity of Program Transformations under Java Memory Model 
+9) Foundations of the C11 Concurrency Model
+10) Mathematizing C11 Concurrency
+11) Common Compiler Optimizations are invalid under C11 Memory Model and what can we do about it.
+12) C11 Compiler Testing via a Theory of Sound Optimizations
+13) SC Preserving Memory Model
+14) Promising Semantics
+15) Explaining Relaxed Models using Program Transformations
+16) Herding Cats 
+17) Soundness of Data Flow Analysis for Weak Memory Models
