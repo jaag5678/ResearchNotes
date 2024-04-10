@@ -186,6 +186,7 @@
 
         \begin{itemize}
             \item Do not tackle optimizations only involving atomics, claiming this is rarely done by compilers. 
+            \item LICM tackled only involves removing read-events outside the loop, what about writes? Usually writes are not involved or considered as a Loop invariant. 
             \item SEQ thus, cannot be used for atomic optimizations, and thus atomic based optimizations would require understanding PS at its full.
             \item SEQ relies on the practical implementation and usage of Promising Semantics as a programming language model.
             \item Paper claims it addresses optimizations without catch-fire semantics, but still uses a notion of UB from LLVM semantics to prove soundness of optimizations. 
