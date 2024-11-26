@@ -1,9 +1,9 @@
-PWD /home/sable/aaksha/ResearchNotes/NotesOnPapers/SeqReasoningOptmizations/Presentation
+PWD /home/sable/aaksha/ResearchNotes/NotesOnPapers/Completed/SeqReasoningOptmizations/Presentation
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/SeqReasoningOptmizations/Presentation/presentation.tex
+INPUT /home/sable/aaksha/ResearchNotes/NotesOnPapers/Completed/SeqReasoningOptmizations/Presentation/presentation.tex
 OUTPUT presentation.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
