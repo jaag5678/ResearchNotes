@@ -24,6 +24,7 @@
 \newcommand{\mo}{\textcolor{Red}{mo}}
 \newcommand{\hb}{\textcolor{NavyBlue}{hb}}
 \newcommand{\fr}{\textcolor{RubineRed}{fr}}
+\newcommand{\rb}{\textcolor{RubineRed}{rb}}
 \newcommand{\xhb}{\textcolor{NavyBlue}{xhb}}
 \newcommand{\rfe}{\textcolor{Green}{rfe}}
 \newcommand{\rfi}{\textcolor{Green}{rfi}}
@@ -43,8 +44,9 @@
     \begin{frame}
         \maketitle
     \end{frame}
-    %First section should elicit the preliminary definitions needed to define these models.
-    %Specific models may have additional definitions and we can contain them in their respective sections. 
+  
+
+    %Preliminary notations and Definitions --------------------------------------------------------------------------------------
 
     \begin{frame}{Preliminary Definitions}
         
@@ -74,7 +76,7 @@
             \item $R^{+}$ - Transitive relation $\langle a, b\rangle \in R \ \wedge \ \langle b, c\rangle \in R \ \Rightarrow \ \langle a, c\rangle \in R$. 
             \item $R^{*}$ - Reflexive Transitive relation $R^{+} U R^{?}$.
             \item $R1;R2$ - Sequential composition $\langle a, b\rangle \in R1 \ \wedge \ \langle b, c\rangle \in R2 \ \Rightarrow \ \langle a, c\rangle \in R1;R2$
-            \item $[R]$ - Identity relation $\langle a, b\rangle \in R \ \Rightarrow \ a=b$.
+            \item $[E]$ - Identity relation $\langle a, b\rangle \in [E] \ \Rightarrow \ a=b$.
             \item $dom(R)$ - Domain of $R$.
             \item $codom(R)$ - Range of $R$.
         \end{itemize}
@@ -118,26 +120,36 @@
 
     \end{frame}
 
-    %----------------------------------------------------------------------------------------------------------------------------------
-    
+    %Sequential Consistency----------------------------------------------------------------------------------------------------------------------------------
+
     \begin{frame}{Sequential Consistency (SC)}
         
         Additional binary relations:
         \begin{itemize}
             \item {\hb} - Happens before $ \hb = (\po \cup \rf)^{+} $
-            \item {\fr} - Reads before (from reads) $ \fr = (\rf^{-1};\mo_{|loc}) $ 
+            \item {\rb}- Reads before (from reads) $\rb = (\rf^{-1};\mo_{|loc})$  
         \end{itemize}
 
-        SC is defined using the following irreflexivity relations that must hold for any program execution:
+        SC is more commonly known to be the following acyclicity constraint that must hold for any program execution 
+        \begin{center}
+            $(\po \cup \rf \cup \rb \cup \co)$ acyclic.
+        \end{center}
+
+    \end{frame}
+
+
+    \begin{frame}{SC: Alternative Definition}
+
+        SC can also be defined using the following irreflexivity relations that must hold for any program execution:
         \begin{tasks}(2)
             \task {\mo} irreflexive and total.
             \task {\hb} irreflexive.
             \task {\mo;\hb} irreflexive.
-            \task {\fr;\hb} irreflexive.
-            \task {\fr;\mo} irreflexive.
-            \task {\fr;\mo;\hb} irreflexive.
+            \task {\rb;\hb} irreflexive.
+            \task {\rb;\mo} irreflexive.
+            \task {\rb;\mo;\hb} irreflexive.
         \end{tasks}
-
+        
     \end{frame}
 
     \note{
@@ -168,23 +180,31 @@
 
     %----------------------------------------------------------------------------------------------------------------------------
     
+   
+
+
     \begin{frame}{x86 Total Store Order (TSO)}
         
         Additional binary relations:
         \begin{itemize}
-            \item {\xhb} - Happens before $ \xhb = (\po \cup \rf)^{+} $
-            \item {\fr} - Reads before (from reads) $ \fr = (\rf^{-1};\mo_{|loc}) $ 
-            \item {\rfe} - Reads from external $\rf \text{ \textbackslash} \ \po$
+            \item {\xhb} - Happens before $\xhb = (\po \cup \rf)^{+}$
+            \item {\rb} - Reads before (from reads) $\rb = (\rf^{-1};\mo_{|loc})$ 
+            \item {\rfe} - Reads from external $\rf \setminus \po$
         \end{itemize}
 
+        TAKE THE MODEL UNDERSTOOD FROM SOHAM OR JADE ALGLAVE's HERDING CATS
+        
+    \end{frame}
+
+    \begin{frame}{x86 TSO: Alternative Definition}
         x86 TSO is defined using the following irreflexivity relations that must hold for any program execution:
         \begin{tasks}(2)
             \task {\xhb} irreflexive.
             \task {\mo;\xhb} irreflexive.
-            \task {\fr;\xhb} irreflexive.
-            \task {\fr;\mo} irreflexive.
-            \task {\fr;\mo;\rfe;\po} irreflexive.
-            \task {\fr;\mo;$[U \cup F]$;\po} irreflexive.
+            \task {\rb;\xhb} irreflexive.
+            \task {\rb;\mo} irreflexive.
+            \task {\rb;\mo;\rfe;\po} irreflexive.
+            \task {\rb;\mo;$[U \cup F]$;\po} irreflexive.
         \end{tasks}
 
     \end{frame}
@@ -210,6 +230,100 @@
         \end{figure}
 
     \end{frame}
+
+
+    %Release Acquire Model
+    \begin{frame}{Release Acquire (RA)}
+        
+        Additional definition (replacement to {\mo})
+        \begin{itemize}
+            \item {\rmo} - Disjoint union of {$\mo_{loc}$}.
+        \end{itemize}
+
+        RA is defined by the following irreflexivity relations that must hold for any execution.
+        \begin{tasks}(2)
+            \task {$\mo_{loc}$} is a strict total order.
+            \task {\hb} irreflexive.
+            \task {\rmo;\hb} irreflexive.
+            \task {\fr;\hb} irreflexive.
+            \task {\fr;\rmo} irreflexive.
+        \end{tasks}
+
+    \end{frame}
+
+    \note{
+        The release acquire model is mainly known for its non-multi-copy-atomic behavior.
+        This means, threads can see updates to memory in different orders or timelines. 
+        The typical example to show this is called the IRIW litmus tests (literally means, immeidate read, immediate write).
+        Other than this feature, release acquire also allows reordering of the forms W-R (write-read reordering).
+        As a special transformation, it is observed that many non-multi-copy atomic behaviors can be explained in a multi-copy atomic sense using the Sequentialization optimization, which is sound under RA.
+        Proof for this can be written as a side exercise during PhD.
+    }
+
+    \begin{frame}{Example: IRIW (non-multi-copy atomic behaviors shown by RA)}
+        
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{RA-IRIW.PNG}
+            }
+        \end{figure}
+
+        Note: This behavior is neither allowed under SC nor under TSO as they exhibit only multi-copy atomic behaviors.
+
+    \end{frame}
+
+
+    %----------------------------------------------------------------------------------------------------------------------------------------
+
+    %JavaScript Memory model
+    \begin{frame}{JavaScript Memory Model}
+        
+        Additional type for each memory access - Unordered($uo$)|Initialize($init$)|SequentiallyConsistent($sc$)
+        \begin{itemize}
+            \item $W \ ::= \ uo|init|sc $.
+            \item $R \ ::= \ uo|sc $.
+            \item $RMW \ ::= \ sc$
+        \end{itemize}
+
+        Memory location(s) have three forms - Disjoint($dj$)|Overlap($op$)|Equal($eq$)
+        Wherever relevant, in a binary relation we will use the above three forms.
+        
+        Additional Binary Relations:
+        \begin{itemize}
+            \item {\sw} - Synchronize-with $po \ \cup \ ([W_{sc}];\rf;[R_{sc}])_{eq}$
+            \item {\jhb} - Happens before $\sw \ \cup \ \{\langle a,b \rangle | a = W[init] \ \wedge \ b=W|R|RMW \ \wedge \ ([a];\xhb;[b])_{op} \}$
+            \item {\jmo} - Memory order (total order of all events in execution) 
+        \end{itemize}
+
+        
+    \end{frame}
+
+    %Irreflexivity constraints
+    \begin{frame}{JavaScript Memory Model: Axioms}
+        
+        \begin{tasks}(2)
+            \task {\jhb} irreflexive.
+            \task {\jhb;\jmo} irreflexive.
+            \task {\jhb;\rf} irreflexive.
+            \task {$(\fr;\xhb)_{op}$} irreflexive.
+        \end{tasks}
+
+        \begin{enumerate}
+            \item {$(([R_{sc}];\fr;[W_{sc}])_{eq};\mo;[W'_{sc}];\mo)_{eq}$} irreflexive.
+            \item {$([W_{sc}];\jhb;[R];\fr;[W'_{sc}])_{eq};\jhb;[R];\rf^{-1}$} irreflexive. %Since rf-1 is not functional in nature, we would need some additional conditions for mixed size. 
+            \item {$[W];\jhb;([R_{sc}];\fr;[W'_{sc}])_{eq};\jhb;[R_{sc}];\rf^{-1}$} irreflexive.
+        \end{enumerate}
+        %W,W' is sc and R can be any. W-hb-R and W'-hb-R and W-mo-W'-mo-R and W-rf-R is not allowed and W,W' eq range
+        % W-hb-R-fr-W'-hb-R-rf^{-1}
+        %W',R is sc and W can be any. W-hb-W' and W-hb-R and W-mo-W'-mo-R and W-rf-R is not allowed and W',R eq range
+    \end{frame}
+
+    %C11 memory model
+    \begin{frame}{C11/C++ Memory Consistency Model}
+        Additional binary relations:
+    \end{frame}
+
+    %Irreflexivity constraints
     
     %--------------------------------------------------------------------------------------------------------------------------
 
@@ -497,98 +611,7 @@
 
     %---------------------------------------------------------------------------------------------------------------------------------------
 
-    %Release Acquire Model
-    \begin{frame}{Release Acquire (RA)}
-        
-        Additional definition (replacement to {\mo})
-        \begin{itemize}
-            \item {\rmo} - Disjoint union of {$\mo_{loc}$}.
-        \end{itemize}
-
-        RA is defined by the following irreflexivity relations that must hold for any execution.
-        \begin{tasks}(2)
-            \task {$\mo_{loc}$} is a strict total order.
-            \task {\hb} irreflexive.
-            \task {\rmo;\hb} irreflexive.
-            \task {\fr;\hb} irreflexive.
-            \task {\fr;\rmo} irreflexive.
-        \end{tasks}
-
-    \end{frame}
-
-    \note{
-        The release acquire model is mainly known for its non-multi-copy-atomic behavior.
-        This means, threads can see updates to memory in different orders or timelines. 
-        The typical example to show this is called the IRIW litmus tests (literally means, immeidate read, immediate write).
-        Other than this feature, release acquire also allows reordering of the forms W-R (write-read reordering).
-        As a special transformation, it is observed that many non-multi-copy atomic behaviors can be explained in a multi-copy atomic sense using the Sequentialization optimization, which is sound under RA.
-        Proof for this can be written as a side exercise during PhD.
-    }
-
-    \begin{frame}{Example: IRIW (non-multi-copy atomic behaviors shown by RA)}
-        
-        \begin{figure}
-            \makebox[\textwidth][c]{
-                \includegraphics[scale=0.5]{RA-IRIW.PNG}
-            }
-        \end{figure}
-
-        Note: This behavior is neither allowed under SC nor under TSO as they exhibit only multi-copy atomic behaviors.
-
-    \end{frame}
-
-
-    %----------------------------------------------------------------------------------------------------------------------------------------
-
-    %JavaScript Memory model
-    \begin{frame}{JavaScript Memory Model}
-        
-        Additional type for each memory access - Unordered($uo$)|Initialize($init$)|SequentiallyConsistent($sc$)
-        \begin{itemize}
-            \item $W \ ::= \ uo|init|sc $.
-            \item $R \ ::= \ uo|sc $.
-            \item $RMW \ ::= \ sc$
-        \end{itemize}
-
-        Memory location(s) have three forms - Disjoint($dj$)|Overlap($op$)|Equal($eq$)
-        Wherever relevant, in a binary relation we will use the above three forms.
-        
-        Additional Binary Relations:
-        \begin{itemize}
-            \item {\sw} - Synchronize-with $po \ \cup \ ([W_{sc}];\rf;[R_{sc}])_{eq}$
-            \item {\jhb} - Happens before $\sw \ \cup \ \{\langle a,b \rangle | a = W[init] \ \wedge \ b=W|R|RMW \ \wedge \ ([a];\xhb;[b])_{op} \}$
-            \item {\jmo} - Memory order (total order of all events in execution) 
-        \end{itemize}
-
-        
-    \end{frame}
-
-    %Irreflexivity constraints
-    \begin{frame}{JavaScript Memory Model: Axioms}
-        
-        \begin{tasks}(2)
-            \task {\jhb} irreflexive.
-            \task {\jhb;\jmo} irreflexive.
-            \task {\jhb;\rf} irreflexive.
-            \task {$(\fr;\xhb)_{op}$} irreflexive.
-        \end{tasks}
-
-        \begin{enumerate}
-            \item {$(([R_{sc}];\fr;[W_{sc}])_{eq};\mo;[W'_{sc}];\mo)_{eq}$} irreflexive.
-            \item {$([W_{sc}];\jhb;[R];\fr;[W'_{sc}])_{eq};\jhb;[R];\rf^{-1}$} irreflexive. %Since rf-1 is not functional in nature, we would need some additional conditions for mixed size. 
-            \item {$[W];\jhb;([R_{sc}];\fr;[W'_{sc}])_{eq};\jhb;[R_{sc}];\rf^{-1}$} irreflexive.
-        \end{enumerate}
-        %W,W' is sc and R can be any. W-hb-R and W'-hb-R and W-mo-W'-mo-R and W-rf-R is not allowed and W,W' eq range
-        % W-hb-R-fr-W'-hb-R-rf^{-1}
-        %W',R is sc and W can be any. W-hb-W' and W-hb-R and W-mo-W'-mo-R and W-rf-R is not allowed and W',R eq range
-    \end{frame}
-
-    %C11 memory model
-    \begin{frame}{C11/C++ Memory Consistency Model}
-        Additional binary relations:
-    \end{frame}
-
-    %Irreflexivity constraints
+    
 
 
 \end{document}
