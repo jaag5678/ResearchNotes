@@ -208,4 +208,38 @@
 
     \end{frame}
 
+    \begin{frame}{Fourth Step: Proving Correctness}
+
+        \begin{itemize}
+            \item Rely on the Axiomatic Specification of Hardware Models (Herding Cats).
+            \item Programs mapped to candidate executions using per-thread sequential semantics.
+            \item Candidate Executions are filtered via respective hardware model, giving consistent executions.
+        \end{itemize}
+        
+    \end{frame}
+
+
+    \begin{frame}
+       
+        Consider \emph{Transform Function} as our PRE algorithm applied on program $P$, transforming it to $P'$.
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{Correctness_1.jpeg}
+            }
+        \end{figure}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{Correctness_2.jpeg}
+            }
+        \end{figure}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{Correctness_3.jpeg}
+            }
+        \end{figure}
+        
+    \end{frame}
+
 \end{document}
