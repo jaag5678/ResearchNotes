@@ -167,6 +167,13 @@
         
     \end{frame}
 
+    \note{
+        The motivation is taken from Herding Cats paper, where fences are represented not as instructions, but as relations between memory events.
+        Intuitively this makes sense, as a fence influences the order in which memory actions take place.
+        Surprisingly, viewing these relations as graph edges where nodes are memory events is isomorphic to a PRE representation of a control flow graph.
+        In this setting the information flow is instead the fences, which are edges.
+    }
+
     \begin{frame}{First Step: Use Herding Cats Model}
         
         \begin{itemize}
@@ -178,6 +185,11 @@
 
     \end{frame}
 
+    \note{
+        Program is converted to a graph/execution trace, where nodes are memory events and edges are simply control flow and fences.
+        Fence edges, as intuitively understood, is from the memory event just before it to memory event just after it. 
+    }
+
     \begin{frame}{Second Step: Correlate with PRE}
 
         \begin{itemize}
@@ -188,6 +200,13 @@
         \end{itemize}
         
     \end{frame}
+
+    \note{
+        The correlation with PRE is ingenious. 
+        Intuitively, the job of PRE is, given a computation and a target point, ensure every control flow path to the target point has that computation, while removing any repetition of computing it.
+        In our case, this computation is a fence, and the target point is the memory event just after the fence. 
+        Thus, the PRE problem now is to eliminate redundant fences, while still ensuring at least one fence exists which reaches desired target memory event across every control flow path. 
+    }
 
     \begin{frame}{Third Step: PRE Solve as Min Cut}
         
@@ -207,6 +226,13 @@
         \end{itemize}
 
     \end{frame}
+
+    \note{
+        Now comes the correlating with the control flow graph with PRE.
+        There is an ingenious way of solving the PRE problem as a min cut problem, where the cut represents the locations/computations that must be preserved, to ensure flow to desired point. 
+        Thus, every desired point can be connected to a sink, and every source point, i.e. event just before fence can be connected to a source. 
+        Now all we have to do is find the min cut and thereby identifying locations where the fences must remain/inserted. 
+    }
 
     \begin{frame}{Fourth Step: Proving Correctness}
 
