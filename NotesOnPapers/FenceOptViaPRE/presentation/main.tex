@@ -208,6 +208,17 @@
         Thus, the PRE problem now is to eliminate redundant fences, while still ensuring at least one fence exists which reaches desired target memory event across every control flow path. 
     }
 
+    \begin{frame}{Example}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{Reduction_PRE.jpeg}
+            }
+            \caption{Example Control Flow Graph with its PRE-centric representation for Fence Elimination.}
+        \end{figure}
+        
+    \end{frame}
+
     \begin{frame}{Third Step: PRE Solve as Min Cut}
         
         \begin{itemize}
@@ -234,6 +245,17 @@
         Now all we have to do is find the min cut and thereby identifying locations where the fences must remain/inserted. 
     }
 
+    \begin{frame}{Example}
+
+        \begin{figure}
+            \makebox[\textwidth][c]{
+                \includegraphics[scale=0.5]{Solution_with_PRE.jpeg}
+            }
+            \caption{Example Min Cut with the optimized Control Flow Graph.}
+        \end{figure}
+        
+    \end{frame}
+
     \begin{frame}{Fourth Step: Proving Correctness}
 
         \begin{itemize}
@@ -244,6 +266,12 @@
         
     \end{frame}
 
+    \note{
+        Per-thread sequential semantics dictates what read/write values are expected out of memory read/writes for a specific thread execution.
+        The resultant graph for all such threads together will be a collection of events (graph nodes) with the syntactic order (as edges).
+        Connecting each read value with appropriate write value results in a well-formed candidate execution; meaning to say that this execution seems to be possible via the concrete values.
+        These executions are then filtered by the underlying memory model, which are rules over the shape of execution graphs reprsenting a program execution.
+    }
 
     \begin{frame}
        
