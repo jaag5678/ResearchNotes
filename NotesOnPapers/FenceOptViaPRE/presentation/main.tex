@@ -296,4 +296,33 @@
         
     \end{frame}
 
+    \note{
+        The first lemma is on candidate executions in general, simply stating that applying the optimization on them ensures there exists a candidate execution derived from the optimized program which has the same graph ordering among events with the exception that there are fewer fences, or fence edges.
+        This is simply followed by a Corollary that uses the result on executions of the program, stating that the relations that are used to describe the consistent execution strictly increase, thereby making sure that executions from the transformed program are contained by that of the source. 
+        This is stated by the final theorem of correctness.
+        As a note, this kind of proof leverages the monotonicity existing within the memory model considered (ARM, TSO, POWER).
+    }
+
+    \begin{frame}{Future Work/ Limitations}
+
+        \begin{itemize}
+            \item Pending Interprocedural Analyses - Current algorithm only uses information within the same procedure to add/remove fences.
+            \item Not Leverage C11 Specific Accesses - The algorithm is implemented on an IR that has already inserted fences for specific accesses of C11. 
+            \item Conservative weight estimates - Fence weights are determined via profiling information, which ultimately affects the calculation of Min Cut for PRE. This leads to a better solution, however, it is conservative. 
+        \end{itemize}
+        
+    \end{frame}
+
+    \begin{frame}{Further reading from Paper}
+
+        \begin{itemize}
+            \item Testing results.
+            \item Corner cases of optimizations.
+        \end{itemize}
+        
+
+        Thank you. 
+    \end{frame}
+
+
 \end{document}
